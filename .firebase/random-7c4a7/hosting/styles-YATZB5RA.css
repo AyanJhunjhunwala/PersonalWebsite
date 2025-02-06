@@ -1,0 +1,1 @@
+.pill{display:inline-block;padding:10px 20px;margin:5px;border:2px solid #007bff;border-radius:20px;color:#007bff;text-decoration:none;font-weight:700;transition:transform .3s ease,background-color .3s ease,color .3s ease,box-shadow .3s ease}.pill:hover{transform:scale(1.1);background-color:#007bff;color:#fff;box-shadow:0 8px 15px #007bff4d}

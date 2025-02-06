@@ -1,0 +1,325 @@
+<style>
+  :host {
+    --bright-blue: oklch(51.01% 0.274 263.83);
+    --electric-violet: oklch(53.18% 0.28 296.97);
+    --french-violet: oklch(47.66% 0.246 305.88);
+    --vivid-pink: oklch(69.02% 0.277 332.77);
+    --hot-red: oklch(61.42% 0.238 15.34);
+    --orange-red: oklch(63.32% 0.24 31.68);
+
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+
+    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+      180deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+      90deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --pill-accent: var(--bright-blue);
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1 {
+    font-size: 3.125rem;
+    color: var(--gray-900);
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: -0.125rem;
+    margin: 0;
+    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+  p {
+    margin: 0;
+    color: var(--gray-700);
+  }
+
+  main {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: inherit;
+    position: relative;
+  }
+
+  .angular-logo {
+    max-width: 9.2rem;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 3rem;
+  }
+
+  .content h1 {
+    margin-top: 1.75rem;
+  }
+
+  .content p {
+    margin-top: 1.5rem;
+  }
+
+  .divider {
+    width: 1px;
+    background: var(--red-to-pink-to-purple-vertical-gradient);
+    margin-inline: 0.5rem;
+  }
+
+  .pill-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    --pill-accent: var(--bright-blue);
+    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+    color: var(--pill-accent);
+    padding-inline: 0.75rem;
+    padding-block: 0.375rem;
+    border-radius: 2.75rem;
+    border: 0;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family: var(--inter-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem;
+    letter-spacing: -0.00875rem;
+    text-decoration: none;
+  }
+
+  .pill:hover {
+    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+    transform: scale(1.05);
+  }
+
+  .pill-group .pill:nth-child(6n + 1) {
+    --pill-accent: var(--bright-blue);
+  }
+  .pill-group .pill:nth-child(6n + 2) {
+    --pill-accent: var(--french-violet);
+  }
+  .pill-group .pill:nth-child(6n + 3),
+  .pill-group .pill:nth-child(6n + 4),
+  .pill-group .pill:nth-child(6n + 5) {
+    --pill-accent: var(--hot-red);
+  }
+
+  .pill-group svg {
+    margin-inline-start: 0.25rem;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.73rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-links path {
+    transition: fill 0.3s ease;
+    fill: var(--gray-400);
+  }
+
+  .social-links a:hover svg path {
+    fill: var(--gray-900);
+  }
+
+  @media screen and (max-width: 650px) {
+    .content {
+      flex-direction: column;
+      width: max-content;
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background: var(--red-to-pink-to-purple-horizontal-gradient);
+      margin-block: 1.5rem;
+    }
+  }
+
+  /* Animation Styles */
+  .aquarium {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin-top: 2rem;
+    background: #b3e5fc;
+    border: 5px solid #0288d1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .aquarium__water {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70%;
+    background: #81d4fa;
+    animation: waterMove 5s infinite ease-in-out;
+  }
+
+  @keyframes waterMove {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5%);
+    }
+  }
+
+  .aquarium__bubble {
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    background: #e1f5fe;
+    border-radius: 50%;
+    animation: bubbleRise 5s infinite;
+    opacity: 0.7;
+  }
+
+  .aquarium__bubble:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+  }
+  .aquarium__bubble:nth-child(3) {
+    left: 40%;
+    animation-delay: 2s;
+  }
+  .aquarium__bubble:nth-child(4) {
+    left: 60%;
+    animation-delay: 3s;
+  }
+  .aquarium__bubble:nth-child(5) {
+    left: 80%;
+    animation-delay: 4s;
+  }
+
+  @keyframes bubbleRise {
+    0% {
+      bottom: 0;
+      opacity: 0.7;
+      transform: translateX(0);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      bottom: 100%;
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+  }
+
+  /* SpongeBob Animation */
+  .aquarium__sponge-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: spongeBobDance 2s infinite ease-in-out;
+  }
+
+  @keyframes spongeBobDance {
+    0%,
+    100% {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    50% {
+      transform: translateX(-50%) rotate(10deg);
+    }
+  }
+</style>
+
+<main class="main">
+  <div class="content">
+    <!-- Introduction Section -->
+    <section class="intro">
+      <h1>Hi, I'm Ayan</h1>
+      <p>CS &#64; UCI</p>
+      <p>Building elegant web experiences and exploring the future of technology.</p>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider" role="separator" aria-label="Divider"></div>
+
+    <!-- Links Section -->
+    <section class="links">
+      <div class="pill-group">
+        <a
+          class="pill"
+          href="https://github.com/AyanJhunjhunwala"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>GitHub</span>
+        </a>
+        <a
+          class="pill"
+          href="https://www.linkedin.com/in/ayanjhunjhunwala/"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>LinkedIn</span>
+        </a>
+        <!-- Add more pills as needed -->
+        <a class="pill" routerLink="/portfolio">
+          <span>Portfolio</span>
+        </a>
+      </div>
+
+      <!-- Aquarium Animation -->
+      <div class="aquarium">
+        <div class="aquarium__water"></div>
+        <div class="aquarium__bubble"></div>
+        <div class="aquarium__bubble"></div>
+        <div class="aquarium__bubble"></div>
+        <div class="aquarium__bubble"></div>
+        <div class="aquarium__bubble"></div>
+        <!-- SpongeBob Element -->
+        <div class="aquarium__sponge-box">
+          <div class="aquarium__body">
+            <div class="aquarium__body-stripe"></div>
+            <div class="aquarium__body-hole"></div>
+          </div>
+          <div class="aquarium__face">
+            <div class="aquarium__mouth"></div>
+            <div class="aquarium__smile"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
