@@ -4,10 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ayan's Portfolio</title>
-    <!-- Link to your CSS file or include your CSS styles here -->
-    <link rel="stylesheet" />
     <style>
-      /* --- Gradient Background & Goo Filter Styles --- */
+      /* Global Reset and Hide Vertical Scrollbar */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-y: hidden; /* Hides the vertical scrollbar */
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Gradient Background Container */
       .gradient-bg {
         width: 100vw;
         height: 100vh;
@@ -129,7 +137,7 @@
         opacity: 0.7;
       }
 
-      /* --- Keyframes --- */
+      /* Keyframe Animations */
       @keyframes moveInCircle {
         0% {
           transform: rotate(0deg);
@@ -166,10 +174,10 @@
         }
       }
 
-      /* --- Main Content Styles --- */
+      /* Main Content Styles */
       main.main {
         position: relative;
-        z-index: 10; /* Ensures the main content sits above the background */
+        z-index: 10; /* Sits above the gradient background */
         width: 100%;
         min-height: 100vh;
         display: flex;
@@ -233,94 +241,6 @@
         width: 20px;
         height: 20px;
         margin-right: 8px;
-      }
-
-      /* Aquarium and SpongeBob Styles (if not defined elsewhere) */
-      .aquarium {
-        position: relative;
-        width: 200px;
-        height: 300px;
-        margin: 2rem auto;
-        background: #d1e8ff;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .aquarium__water {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 70%;
-        background: #a7d2ff;
-        animation: waterMove 5s infinite ease-in-out;
-      }
-
-      @keyframes waterMove {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-5%);
-        }
-      }
-
-      .aquarium__bubble {
-        position: absolute;
-        bottom: 0;
-        width: 10px;
-        height: 10px;
-        background: #e1f5fe;
-        border-radius: 50%;
-        animation: bubbleRise 5s infinite;
-        opacity: 0.7;
-      }
-
-      @keyframes bubbleRise {
-        0% {
-          bottom: 0;
-          opacity: 0.7;
-          transform: translateX(0);
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          bottom: 100%;
-          opacity: 0;
-          transform: translateX(-20px);
-        }
-      }
-
-      .aquarium__sponge-box {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        animation: spongeBobDance 2s infinite ease-in-out,
-          sparkle 3s infinite ease-in-out;
-      }
-
-      @keyframes spongeBobDance {
-        0%,
-        100% {
-          transform: translateX(-50%) rotate(0deg);
-        }
-        50% {
-          transform: translateX(-50%) rotate(10deg);
-        }
-      }
-
-      @keyframes sparkle {
-        0% {
-          filter: brightness(1);
-        }
-        50% {
-          filter: brightness(1.5);
-        }
-        100% {
-          filter: brightness(1);
-        }
       }
     </style>
   </head>
@@ -392,27 +312,6 @@
               />
               LinkedIn
             </a>
-          </div>
-
-          <!-- Aquarium Animation -->
-          <div class="aquarium">
-            <div class="aquarium__water"></div>
-            <div class="aquarium__bubble"></div>
-            <div class="aquarium__bubble"></div>
-            <div class="aquarium__bubble"></div>
-            <div class="aquarium__bubble"></div>
-            <div class="aquarium__bubble"></div>
-            <!-- SpongeBob Element -->
-            <div class="aquarium__sponge-box">
-              <div class="aquarium__body">
-                <div class="aquarium__body-stripe"></div>
-                <div class="aquarium__body-hole"></div>
-              </div>
-              <div class="aquarium__face">
-                <div class="aquarium__mouth"></div>
-                <div class="aquarium__smile"></div>
-              </div>
-            </div>
           </div>
         </section>
       </div>
