@@ -1,388 +1,421 @@
-<style>
-  /* Global Reset: Remove margins, padding, borders */
-  * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-  }
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-  }
-  body {
-    background: none;
-  }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ayan's Portfolio</title>
+    <!-- Link to your CSS file or include your CSS styles here -->
+    <link rel="stylesheet" />
+    <style>
+      /* --- Gradient Background & Goo Filter Styles --- */
+      .gradient-bg {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        background: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
+        z-index: 1;
+      }
 
-  /* Color & Font Variables (used via :host for this component) */
-  :host {
-    --bright-blue: oklch(51.01% 0.274 263.83);
-    --electric-violet: oklch(53.18% 0.28 296.97);
-    --french-violet: oklch(47.66% 0.246 305.88);
-    --vivid-pink: oklch(69.02% 0.277 332.77);
-    --hot-red: oklch(61.42% 0.238 15.34);
-    --orange-red: oklch(63.32% 0.24 31.68);
+      .gradient-bg svg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+      }
 
-    --gray-900: oklch(19.37% 0.006 300.98);
-    --gray-700: oklch(36.98% 0.014 302.71);
-    --gray-400: oklch(70.9% 0.015 304.04);
+      .gradient-bg .gradients-container {
+        filter: url(#goo) blur(40px);
+        width: 100%;
+        height: 100%;
+      }
 
-    --pill-accent: var(--bright-blue);
+      .gradient-bg .gradients-container > div {
+        position: absolute;
+        background-repeat: no-repeat;
+        mix-blend-mode: hard-light;
+      }
 
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+      .gradient-bg .g1 {
+        background: radial-gradient(
+          circle at center,
+          rgba(18, 113, 255, 0.8) 0,
+          rgba(18, 113, 255, 0) 50%
+        );
+        width: var(--circle-size, 80%);
+        height: var(--circle-size, 80%);
+        top: calc(50% - var(--circle-size, 80%) / 2);
+        left: calc(50% - var(--circle-size, 80%) / 2);
+        transform-origin: center center;
+        animation: moveVertical 30s ease infinite;
+        opacity: 1;
+      }
 
-  /* Main container with a lighter, static pastel gradient background */
-  main.main {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    position: relative;
-    background: linear-gradient(45deg, #fce4ec, #e8eaf6);
-  }
+      .gradient-bg .g2 {
+        background: radial-gradient(
+          circle at center,
+          rgba(221, 74, 255, 0.8) 0,
+          rgba(221, 74, 255, 0) 50%
+        );
+        width: var(--circle-size, 80%);
+        height: var(--circle-size, 80%);
+        top: calc(50% - var(--circle-size, 80%) / 2);
+        left: calc(50% - var(--circle-size, 80%) / 2);
+        transform-origin: calc(50% - 400px);
+        animation: moveInCircle 20s reverse infinite;
+        opacity: 1;
+      }
 
-  /* Zoom In Animation for the overall content */
-  @keyframes zoomIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
+      .gradient-bg .g3 {
+        background: radial-gradient(
+          circle at center,
+          rgba(100, 220, 255, 0.8) 0,
+          rgba(100, 220, 255, 0) 50%
+        );
+        width: var(--circle-size, 80%);
+        height: var(--circle-size, 80%);
+        top: calc(50% - var(--circle-size, 80%) / 2 + 200px);
+        left: calc(50% - var(--circle-size, 80%) / 2 - 500px);
+        transform-origin: calc(50% + 400px);
+        animation: moveInCircle 40s linear infinite;
+        opacity: 1;
+      }
 
-  /* Fade In Up Animation for text and pills */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+      .gradient-bg .g4 {
+        background: radial-gradient(
+          circle at center,
+          rgba(200, 50, 50, 0.8) 0,
+          rgba(200, 50, 50, 0) 50%
+        );
+        width: var(--circle-size, 80%);
+        height: var(--circle-size, 80%);
+        top: calc(50% - var(--circle-size, 80%) / 2);
+        left: calc(50% - var(--circle-size, 80%) / 2);
+        transform-origin: calc(50% - 200px);
+        animation: moveHorizontal 40s ease infinite;
+        opacity: 0.7;
+      }
 
-  /* Content container with zoom in effect */
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 3rem;
-    animation: zoomIn 0.8s ease-out forwards;
-  }
+      .gradient-bg .g5 {
+        background: radial-gradient(
+          circle at center,
+          rgba(180, 180, 50, 0.8) 0,
+          rgba(180, 180, 50, 0) 50%
+        );
+        width: calc(var(--circle-size, 80%) * 2);
+        height: calc(var(--circle-size, 80%) * 2);
+        top: calc(50% - var(--circle-size, 80%));
+        left: calc(50% - var(--circle-size, 80%));
+        transform-origin: calc(50% - 800px) calc(50% + 200px);
+        animation: moveInCircle 20s ease infinite;
+        opacity: 1;
+      }
 
-  /* Intro Section (including profile pic) */
-  .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
-  }
+      .gradient-bg .interactive {
+        background: radial-gradient(
+          circle at center,
+          rgba(140, 100, 255, 0.8) 0,
+          rgba(140, 100, 255, 0) 50%
+        );
+        width: 100%;
+        height: 100%;
+        top: -50%;
+        left: -50%;
+        position: absolute;
+        mix-blend-mode: hard-light;
+        opacity: 0.7;
+      }
 
-  /* Profile picture styling */
-  .profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  }
+      /* --- Keyframes --- */
+      @keyframes moveInCircle {
+        0% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(180deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-  .intro h1 {
-    font-size: 3.125rem;
-    color: var(--gray-900);
-    font-weight: 500;
-    letter-spacing: -0.125rem;
-    margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-      "Segoe UI Emoji", "Segoe UI Symbol";
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
-  }
+      @keyframes moveVertical {
+        0% {
+          transform: translateY(-50%);
+        }
+        50% {
+          transform: translateY(50%);
+        }
+        100% {
+          transform: translateY(-50%);
+        }
+      }
 
-  .intro p {
-    font-size: 1rem;
-    color: var(--gray-700);
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
-    animation-delay: 0.3s;
-  }
+      @keyframes moveHorizontal {
+        0% {
+          transform: translateX(-50%) translateY(-10%);
+        }
+        50% {
+          transform: translateX(50%) translateY(10%);
+        }
+        100% {
+          transform: translateX(-50%) translateY(-10%);
+        }
+      }
 
-  /* Link Pills */
-  .pill-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    margin-top: 2rem;
-  }
+      /* --- Main Content Styles --- */
+      main.main {
+        position: relative;
+        z-index: 10; /* Ensures the main content sits above the background */
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+      }
 
-  .pill {
-    display: flex;
-    align-items: center;
-    --pill-accent: var(--bright-blue);
-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
-    color: var(--pill-accent);
-    padding: 0.375rem 0.75rem;
-    border-radius: 2.75rem;
-    transition: background 0.3s ease, transform 0.3s ease;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
+      .content {
+        text-align: center;
+        color: #fff;
+      }
 
-  .pill:hover {
-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
-    transform: scale(1.05);
-  }
+      .profile-pic {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        border: 4px solid #fff;
+      }
 
-  /* Staggered animation delays for pills */
-  .pill-group .pill:nth-child(1) {
-    animation-delay: 0.4s;
-    --pill-accent: var(--bright-blue);
-  }
-  .pill-group .pill:nth-child(2) {
-    animation-delay: 0.5s;
-    --pill-accent: var(--french-violet);
-  }
-  .pill-group .pill:nth-child(3) {
-    animation-delay: 0.6s;
-    --pill-accent: var(--hot-red);
-  }
-  .pill-group .pill:nth-child(4) {
-    animation-delay: 0.7s;
-    --pill-accent: var(--hot-red);
-  }
-  .pill-group .pill:nth-child(5) {
-    animation-delay: 0.8s;
-    --pill-accent: var(--hot-red);
-  }
-  .pill-group .pill:nth-child(6) {
-    animation-delay: 0.9s;
-    --pill-accent: var(--bright-blue);
-  }
+      .intro h1 {
+        font-size: 3.5rem;
+        margin: 0.5rem 0;
+      }
 
-  @media screen and (max-width: 650px) {
-    .content {
-      width: auto;
-      padding: 1rem;
-    }
-  }
+      .intro p {
+        font-size: 1.2rem;
+        margin: 0.25rem 0;
+      }
 
-  /* Aquarium Animation Styles (Modernized Lighter Colors) */
-  .aquarium {
-    position: relative;
-    width: 200px;
-    height: 300px;
-    margin-top: 2rem;
-    background: #d1e8ff;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
+      .pill-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        margin: 2rem 0;
+      }
 
-  .aquarium__water {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 70%;
-    background: #a7d2ff;
-    animation: waterMove 5s infinite ease-in-out;
-    overflow: hidden;
-  }
+      .pill {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 3rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
 
-  /* Water Ripple Effect */
-  .aquarium__water::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.2) 0%,
-      transparent 70%
-    );
-    opacity: 0.5;
-    animation: ripple 6s infinite ease-in-out;
-  }
+      .pill:hover {
+        transform: scale(1.1);
+        background-color: rgba(255, 255, 255, 0.4);
+      }
 
-  @keyframes ripple {
-    0% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scale(1.2);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-  }
+      .pill img {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
 
-  @keyframes waterMove {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5%);
-    }
-  }
+      /* Aquarium and SpongeBob Styles (if not defined elsewhere) */
+      .aquarium {
+        position: relative;
+        width: 200px;
+        height: 300px;
+        margin: 2rem auto;
+        background: #d1e8ff;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
 
-  .aquarium__bubble {
-    position: absolute;
-    bottom: 0;
-    width: 10px;
-    height: 10px;
-    background: #e1f5fe;
-    border-radius: 50%;
-    animation: bubbleRise 5s infinite;
-    opacity: 0.7;
-  }
+      .aquarium__water {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 70%;
+        background: #a7d2ff;
+        animation: waterMove 5s infinite ease-in-out;
+      }
 
-  /* Positioning bubbles with staggered delays */
-  .aquarium__bubble:nth-child(2) {
-    left: 20%;
-    animation-delay: 1s;
-  }
-  .aquarium__bubble:nth-child(3) {
-    left: 40%;
-    animation-delay: 2s;
-  }
-  .aquarium__bubble:nth-child(4) {
-    left: 60%;
-    animation-delay: 3s;
-  }
-  .aquarium__bubble:nth-child(5) {
-    left: 80%;
-    animation-delay: 4s;
-  }
+      @keyframes waterMove {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5%);
+        }
+      }
 
-  @keyframes bubbleRise {
-    0% {
-      bottom: 0;
-      opacity: 0.7;
-      transform: translateX(0);
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      bottom: 100%;
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-  }
+      .aquarium__bubble {
+        position: absolute;
+        bottom: 0;
+        width: 10px;
+        height: 10px;
+        background: #e1f5fe;
+        border-radius: 50%;
+        animation: bubbleRise 5s infinite;
+        opacity: 0.7;
+      }
 
-  /* SpongeBob Animation with Sparkle */
-  .aquarium__sponge-box {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: spongeBobDance 2s infinite ease-in-out,
-      sparkle 3s infinite ease-in-out;
-  }
+      @keyframes bubbleRise {
+        0% {
+          bottom: 0;
+          opacity: 0.7;
+          transform: translateX(0);
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          bottom: 100%;
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+      }
 
-  @keyframes spongeBobDance {
-    0%,
-    100% {
-      transform: translateX(-50%) rotate(0deg);
-    }
-    50% {
-      transform: translateX(-50%) rotate(10deg);
-    }
-  }
+      .aquarium__sponge-box {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: spongeBobDance 2s infinite ease-in-out,
+          sparkle 3s infinite ease-in-out;
+      }
 
-  @keyframes sparkle {
-    0% {
-      filter: brightness(1);
-    }
-    50% {
-      filter: brightness(1.5);
-    }
-    100% {
-      filter: brightness(1);
-    }
-  }
-</style>
+      @keyframes spongeBobDance {
+        0%,
+        100% {
+          transform: translateX(-50%) rotate(0deg);
+        }
+        50% {
+          transform: translateX(-50%) rotate(10deg);
+        }
+      }
 
-<main class="main">
-    <div class="content">
-      <!-- Introduction Section -->
-      <section class="intro">
-        <!-- Profile Picture (update the path as needed) -->
-        <img src="../yan.png" alt="" class="profile-pic" />
-        <h1>Hi, I'm Ayan!</h1>
-        <p>CS &#64; UCI</p>
-        <p>Building AI &amp; ML platforms daily</p>
-      </section>
-
-    <!-- Links Section -->
-    <section class="links">
-      <div class="pill-group">
-        <a
-          class="pill"
-          href="https://github.com/AyanJhunjhunwala"
-          target="_blank"
-          rel="noopener"
-        >
-          <span>GitHub</span>
-        </a>
-        <a
-          class="pill"
-          href="https://www.linkedin.com/in/ayanjhunjhunwala/"
-          target="_blank"
-          rel="noopener"
-        >
-          <span>LinkedIn</span>
-        </a>
-        <a class="pill" href="/portfolio">
-          <span>Portfolio</span>
-        </a>
+      @keyframes sparkle {
+        0% {
+          filter: brightness(1);
+        }
+        50% {
+          filter: brightness(1.5);
+        }
+        100% {
+          filter: brightness(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Gradient Background Container -->
+    <div class="gradient-bg">
+      <svg>
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  
+                      0 1 0 0 0  
+                      0 0 1 0 0  
+                      0 0 0 18 -7"
+              result="goo"
+            />
+            <feBlend in="SourceGraphic" in2="goo" />
+          </filter>
+        </defs>
+      </svg>
+      <div class="gradients-container">
+        <div class="g1"></div>
+        <div class="g2"></div>
+        <div class="g3"></div>
+        <div class="g4"></div>
+        <div class="g5"></div>
+        <div class="interactive"></div>
       </div>
+    </div>
 
-      <!-- Aquarium Animation -->
-      <div class="aquarium">
-        <div class="aquarium__water"></div>
-        <div class="aquarium__bubble"></div>
-        <div class="aquarium__bubble"></div>
-        <div class="aquarium__bubble"></div>
-        <div class="aquarium__bubble"></div>
-        <div class="aquarium__bubble"></div>
-        <!-- SpongeBob Element -->
-        <div class="aquarium__sponge-box">
-          <div class="aquarium__body">
-            <div class="aquarium__body-stripe"></div>
-            <div class="aquarium__body-hole"></div>
+    <!-- Main Content -->
+    <main class="main">
+      <div class="content">
+        <!-- Introduction Section -->
+        <section class="intro">
+          <img src="/yan.png" alt="Ayan's profile picture" class="profile-pic" />
+          <h1>Hi, I'm Ayan!</h1>
+          <p>CS &#64; UCI</p>
+          <p>Building AI &amp; ML platforms daily</p>
+        </section>
+
+        <!-- Links Section -->
+        <section class="links">
+          <div class="pill-group">
+            <a
+              class="pill"
+              href="https://github.com/AyanJhunjhunwala"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                alt="GitHub Logo"
+              />
+              GitHub
+            </a>
+            <a
+              class="pill"
+              href="https://www.linkedin.com/in/ayanjhunjhunwala/"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                alt="LinkedIn Logo"
+              />
+              LinkedIn
+            </a>
           </div>
-          <div class="aquarium__face">
-            <div class="aquarium__mouth"></div>
-            <div class="aquarium__smile"></div>
+
+          <!-- Aquarium Animation -->
+          <div class="aquarium">
+            <div class="aquarium__water"></div>
+            <div class="aquarium__bubble"></div>
+            <div class="aquarium__bubble"></div>
+            <div class="aquarium__bubble"></div>
+            <div class="aquarium__bubble"></div>
+            <div class="aquarium__bubble"></div>
+            <!-- SpongeBob Element -->
+            <div class="aquarium__sponge-box">
+              <div class="aquarium__body">
+                <div class="aquarium__body-stripe"></div>
+                <div class="aquarium__body-hole"></div>
+              </div>
+              <div class="aquarium__face">
+                <div class="aquarium__mouth"></div>
+                <div class="aquarium__smile"></div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
-    </section>
-  </div>
-</main>
+    </main>
+  </body>
+</html>
