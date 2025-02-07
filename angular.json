@@ -79,9 +79,11 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
+              "src/assets/yan.png",
               {
                 "glob": "**/*",
                 "input": "public"
+                
               }
             ],
             "styles": [
