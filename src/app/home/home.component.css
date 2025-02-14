@@ -1,0 +1,275 @@
+/* Global Reset and Hide Vertical Scrollbar */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden; /* Hides the vertical scrollbar */
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* Gradient Background Container */
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: linear-gradient(40deg, rgb(108, 0, 162), rgb(0, 17, 82));
+  z-index: 1;
+}
+
+.gradient-bg svg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+}
+
+.gradient-bg .gradients-container {
+  filter: url(#goo) blur(40px);
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+
+.gradient-bg .gradients-container > div {
+  position: absolute;
+  background-repeat: no-repeat; overflow: hidden;
+
+  mix-blend-mode: hard-light;
+}
+
+.gradient-bg .g1 {
+  background: radial-gradient(
+    circle at center,
+    rgba(18, 113, 255, 0.8) 0,
+    rgba(18, 113, 255, 0) 50%
+  );
+  width: var(--circle-size, 80%);
+  overflow: hidden;
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2);
+  left: calc(50% - var(--circle-size, 80%) / 2);
+  transform-origin: center center;
+  animation: moveVertical 30s ease infinite;
+  opacity: 1;
+}
+.gradient-bg .gradients-container {
+overflow: hidden;
+filter: url(#goo) blur(40px);
+width: 100%;
+height: 100%;
+}
+::-webkit-scrollbar {
+display: none;
+}
+.gradient-bg .g2 {
+  background: radial-gradient(
+    circle at center,
+    rgba(221, 74, 255, 0.8) 0,
+    rgba(221, 74, 255, 0) 50%
+  );
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2);
+  left: calc(50% - var(--circle-size, 80%) / 2);
+  transform-origin: calc(50% - 400px);
+  animation: moveInCircle 20s reverse infinite;
+  opacity: 1;
+}
+
+.gradient-bg .g3 {
+  background: radial-gradient(
+    circle at center,
+    rgba(100, 220, 255, 0.8) 0,
+    rgba(100, 220, 255, 0) 50%
+  );
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2 + 200px);
+  left: calc(50% - var(--circle-size, 80%) / 2 - 500px);
+  transform-origin: calc(50% + 400px);
+  animation: moveInCircle 40s linear infinite;
+  opacity: 1;
+}
+
+.gradient-bg .g4 {
+  background: radial-gradient(
+    circle at center,
+    rgba(200, 50, 50, 0.8) 0,
+    rgba(200, 50, 50, 0) 50%
+  );
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2);
+  left: calc(50% - var(--circle-size, 80%) / 2);
+  transform-origin: calc(50% - 200px);
+  animation: moveHorizontal 40s ease infinite;
+  opacity: 0.7;
+}
+
+.gradient-bg .g5 {
+  background: radial-gradient(
+    circle at center,
+    rgba(180, 180, 50, 0.8) 0,
+    rgba(180, 180, 50, 0) 50%
+  );
+  width: calc(var(--circle-size, 80%) * 2);
+  height: calc(var(--circle-size, 80%) * 2);
+  top: calc(50% - var(--circle-size, 80%));
+  left: calc(50% - var(--circle-size, 80%));
+  transform-origin: calc(50% - 800px) calc(50% + 200px);
+  animation: moveInCircle 20s ease infinite;
+  opacity: 1;
+}
+
+.gradient-bg .interactive {
+background: radial-gradient(
+circle at center,
+rgba(140, 100, 255, 0.8) 0,
+rgba(140, 100, 255, 0) 50%
+);
+overflow: hidden;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+position: absolute;
+mix-blend-mode: hard-light;
+opacity: 0.7;
+}
+
+
+/* Keyframe Animations */
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+/* Main Content Styles */
+main.main {
+  position: relative;
+  z-index: 10; overflow: hidden; /* Sits above the gradient background */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.content {
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border: 4px solid #fff;
+}
+
+.intro h1 {
+  font-size: 3.5rem;
+  margin: 0.5rem 0;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  margin: 0.25rem 0;
+}
+
+.pill-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 3rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.pill:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .gradient-bg .gradients-container {
+    filter: url(#goo) blur(40px);
+    width: calc(100% + 80px);  /* Adjust for blur spread */
+    height: calc(100% + 80px);
+    margin: -40px;
+    
+    /* Hide scrollbar across browsers */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;     /* Firefox */
+  }
+  .gradient-bg .gradients-container::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+  
+        .pill img {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+        }
