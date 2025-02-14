@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ayan's Portfolio</title>
-  </head>
-  <body>
-    <div class="nav">
-      <a href="#home">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ayan's Portfolio</title>
+  <!-- Link to your external CSS file -->
+  <link rel="stylesheet" href="home.component.css" />
+</head>
+<body>
+  <!-- (Optional) Original Navigation, can remove if not needed -->
+
+
+  <!-- Gradient Background Container -->
+  <div class="gradient-bg">
+    <svg>
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  
+                    0 1 0 0 0  
+                    0 0 1 0 0  
+                    0 0 0 18 -7"
+            result="goo"
+          />
+          <feBlend in="SourceGraphic" in2="goo" />
+        </filter>
+      </defs>
+    </svg>
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="g4"></div>
+      <div class="g5"></div>
+      <div class="interactive"></div>
+    </div>
   </div>
 
-    <!-- Gradient Background Container -->
-    <div class="gradient-bg">
-      <svg>
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  
-                      0 1 0 0 0  
-                      0 0 1 0 0  
-                      0 0 0 18 -7"
-              result="goo"
-            />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
-      <div class="gradients-container">
-        <div class="g1"></div>
-        <div class="g2"></div>
-        <div class="g3"></div>
-        <div class="g4"></div>
-        <div class="g5"></div>
-        <div class="interactive"></div>
-      </div>
-    </div>
+  <!-- Redesigned Tab Navigation -->
+  <div class="tab-navigation">
+    <button class="tablinks active" onclick="openTab(event, 'home')">Home</button>
+    <button class="tablinks" onclick="openTab(event, 'projects')">Projects</button>
+    <button class="tablinks" onclick="openTab(event, 'contact')">Contact</button>
+  </div>
 
-    <!-- Main Content -->
+  <!-- Tab Content -->
+  <div id="home" class="tabcontent" style="display: block;">
     <main class="main">
       <div class="content">
         <!-- Introduction Section -->
@@ -52,7 +58,6 @@
           <p>CS &#64; UCI</p>
           <p>Building AI &amp; ML platforms daily</p>
         </section>
-
         <!-- Links Section -->
         <section class="links">
           <div class="pill-group">
@@ -84,5 +89,48 @@
         </section>
       </div>
     </main>
-  </body>
+  </div>
+
+  <div id="projects" class="tabcontent">
+    <main class="main">
+      <div class="content">
+        <section class="projects">
+          <h2>Projects</h2>
+          <p>Project details will go here.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="contact" class="tabcontent">
+    <main class="main">
+      <div class="content">
+        <section class="contact">
+          <h2>Contact</h2>
+          <p>Contact details will go here.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript for Tab Switching -->
+  <script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      // Hide all tabcontent elements
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      // Remove active class from all tablinks
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      // Show the selected tab content and add active class to the button
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+    }
+  </script>
+</body>
 </html>
