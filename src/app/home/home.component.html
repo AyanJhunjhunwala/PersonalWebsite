@@ -4,13 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ayan's Portfolio</title>
-  <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="home.component.css" />
 </head>
 <body>
-  <!-- (Optional) Original Navigation, can remove if not needed -->
-
-
   <!-- Gradient Background Container -->
   <div class="gradient-bg">
     <svg>
@@ -40,25 +36,23 @@
     </div>
   </div>
 
-  <!-- Redesigned Tab Navigation -->
+  <!-- Simple Pill-like Navigation -->
   <div class="tab-navigation">
-    <button class="tablinks active" onclick="openTab(event, 'home')">Home</button>
-    <button class="tablinks" onclick="openTab(event, 'projects')">Projects</button>
-    <button class="tablinks" onclick="openTab(event, 'contact')">Contact</button>
+    <button onclick="scrollToSection('home')">Home</button>
+    <button onclick="scrollToSection('projects')">Projects</button>
+    <button onclick="scrollToSection('contact')">Contact</button>
   </div>
 
-  <!-- Tab Content -->
-  <div id="home" class="tabcontent" style="display: block;">
+  <!-- Home Section -->
+  <section id="home">
     <main class="main">
       <div class="content">
-        <!-- Introduction Section -->
         <section class="intro">
           <img src="/yan.png" alt="Ayan's profile picture" class="profile-pic" />
           <h1>Hi, I'm Ayan!</h1>
           <p>CS &#64; UCI</p>
           <p>Building AI &amp; ML platforms daily</p>
         </section>
-        <!-- Links Section -->
         <section class="links">
           <div class="pill-group">
             <a
@@ -89,9 +83,10 @@
         </section>
       </div>
     </main>
-  </div>
+  </section>
 
-  <div id="projects" class="tabcontent">
+  <!-- Projects Section -->
+  <section id="projects">
     <main class="main">
       <div class="content">
         <section class="projects">
@@ -100,9 +95,10 @@
         </section>
       </div>
     </main>
-  </div>
+  </section>
 
-  <div id="contact" class="tabcontent">
+  <!-- Contact Section -->
+  <section id="contact">
     <main class="main">
       <div class="content">
         <section class="contact">
@@ -111,25 +107,15 @@
         </section>
       </div>
     </main>
-  </div>
+  </section>
 
-  <!-- JavaScript for Tab Switching -->
+  <!-- Smooth Scroll JavaScript -->
   <script>
-    function openTab(evt, tabName) {
-      var i, tabcontent, tablinks;
-      // Hide all tabcontent elements
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+    window.scrollToSection = function(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
       }
-      // Remove active class from all tablinks
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-      }
-      // Show the selected tab content and add active class to the button
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.classList.add("active");
     }
   </script>
 </body>
