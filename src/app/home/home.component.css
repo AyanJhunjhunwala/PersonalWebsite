@@ -211,53 +211,51 @@ main.main {
   height: 20px;
   margin-right: 8px;
 }
-
-/* Modern, Rounded, Semi-Transparent, Pill-like Tab Navigation */
+/* Modern, Rounded, Dark Tab Navigation */
 .tab-navigation {
   position: fixed;
-  top: 20px;
+  top: 25px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 50px;
-  overflow: hidden;
+  display: inline-flex;
+  background-color: #ffffff78;   /* Dark container color */
+  border-radius: 9999px;    /* Very round for a pill look */
+  padding: 5px;            /* Some internal padding around the tabs */
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
+
+/* Each tab is just a button with white text and a pill shape */
 .tab-navigation button {
   background: transparent;
   border: none;
-  padding: 16px 30px;
-  color: #333;
-  font-size: 18px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.4s ease;
-  outline: none;
-  font-weight: 500;
+  color: #000000;             /* White text */
+  font-size: 20px;         /* Adjust as desired */
   font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  border-radius: 9999px;   /* Round each tab */
+  padding: 10px 20px;      /* Spacing around text */
+  margin: 0 2px;           /* Slight gap between tabs */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
 }
-.tab-navigation button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-10%, -10%) scale(0);
-  width: 120%;
-  height: 120%;
-  background: rgb(255, 255, 255);
-  border-radius: 50px;
-  z-index: -1;
-  transition: transform 0.4s ease;
+
+/* Hover: lighten the background inside the pill shape */
+.tab-navigation button:hover {
+  background-color: rgb(255, 255, 255);
 }
-.tab-navigation button:hover::before,
-.tab-navigation button.active::before {
-  transform: translate(-50%, -50%) scale(1);
+
+/* Active/selected tab: show a slightly lighter circle behind the text */
+.tab-navigation button.active {
+  background-color: rgb(255, 255, 255);
 }
+
+/* Slight click effect */
 .tab-navigation button:active {
-  transform: scale(0.99);
+  transform: scale(0.8);
 }
+
 
 /* Tab Content Styles */
 .tabcontent {
