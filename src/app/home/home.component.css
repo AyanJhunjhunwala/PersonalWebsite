@@ -43,6 +43,7 @@ a, button {
   height: 0;
 }
 
+
 .gradient-bg .gradients-container {
   filter: url(#goo) blur(40px);
   width: calc(100% + 80px);
@@ -255,7 +256,256 @@ main.main {
 .tab-navigation button:active {
   transform: scale(0.8);
 }
+/* Contact Page Container */
+.contact-page {
+  position: relative;
+  z-index: 10;            /* Ensures it appears above the fixed gradient */
+  min-height: 60vh;
+  margin-top: 120px;      /* Space below your fixed nav */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+/* Banner with a glassy look and fade-in-up animation */
+.contact-banner {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(6px);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  /* Start hidden, then animate into view */
+  animation: fadeInUp 0.9s ease forwards;
+  animation-delay: 0.2s;
+}
+
+/* Keyframes for fade-in-up effect */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* "Get in Touch" Email Link styled as a pill */
+.email-link {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.email-link:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+/* Pac-Man Animation at Bottom of Contact Page */
+
+/* Container for the animation */
+/************************************************
+  Pac-Man Animation at the Bottom of Contact Page
+************************************************/
+
+/* Ensure .contact-page is positioned so we can place Pac-Man at the bottom */
+.contact-page {
+  position: relative; /* important for absolute positioning inside */
+  z-index: 10;        /* above your background */
+  min-height: 60vh;
+  margin-top: 120px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* normal content up top */
+}
+
+/* Pac-Man container pinned at bottom center */
+.pacman-container {
+  position: absolute;
+  bottom: 2rem;          /* adjust spacing from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;    /* align Pac-Man & path on same horizontal baseline */
+  justify-content: center;
+  width: 300px;           /* total width for the path travel */
+  height: 70px;           /* matches Pac-Man diameter (70px) */
+  overflow: hidden;       /* hide any overflow from the path animation */
+}
+
+/* Pac-Man itself */
+.pacman {
+  position: relative;
+  width: 70px;            /* total diameter */
+  height: 70px;           /* total diameter */
+  background: transparent;
+  z-index: 2;             /* in front of the path dot */
+}
+
+/* Mouth: two pseudo-elements rotating top & bottom chunks */
+.pacman::before,
+.pacman::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50%;
+  content: "";
+  width: 0;
+  height: 0;
+  border: 35px solid #FFCC00; /* 70px diameter (35px each side) */
+}
+
+/* Top chunk: remove left & bottom for open mouth */
+.pacman::before {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  animation: chunk-top 0.5s ease infinite;
+}
+
+/* Bottom chunk: remove right & top for open mouth */
+.pacman::after {
+  border-right-color: transparent;
+  border-top-color: transparent;
+  animation: chunk-bottom 0.5s ease infinite;
+}
+
+/* The dot path: moves from right to left across Pac-Man's mouth */
+.path {
+  position: relative;
+  margin-left: 1rem;      /* space between Pac-Man & dot start */
+  width: 100%;            /* full container width */
+  height: 1rem;           /* small row for the dot */
+  display: flex;
+  align-items: center;
+  animation: eating-path 1.2s linear infinite;
+}
+
+/* The single dot in the path */
+.path::before {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background: #fff;
+  border-radius: 50%;
+  /* Center vertically */
+  margin: 0 auto;
+}
+
+/************************************************
+  Keyframe Animations
+************************************************/
+@keyframes chunk-top {
+  0%, 100% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(-80deg);
+  }
+}
+
+@keyframes chunk-bottom {
+  0%, 100% {
+    transform: rotate(-40deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Moves the dot from right to left across Pac-Man */
+@keyframes eating-path {
+  0% {
+    transform: translateX(120px);
+  }
+  100% {
+    transform: translateX(-120px);
+  }
+}
+
+/************************************************
+   Projects Section
+************************************************/
+
+/* Grid container for project cards */
+.projects-grid {
+  display: grid;
+  gap: 2rem;
+  /* For a responsive layout, auto-fit columns at 300px min */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+/* Individual project card with glassy background */
+.project-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Slight scale on hover for the entire card */
+.project-card:hover {
+  transform: scale(1.03);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Project image styling */
+.project-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Title & description spacing */
+.project-card h3 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0 0.75rem 0;
+}
+.project-card p {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+/* GitHub link reuses .pill style, but with an icon & text */
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Optionally, override text color if you want darker text on the pill:
+     color: #333; 
+  */
+}
+
+/* Ensure the GitHub icon in the pill is consistent */
+.github-link img {
+  width: 20px;
+  height: 20px;
+}
 
 /* Tab Content Styles */
 .tabcontent {
@@ -274,6 +524,7 @@ main.main {
   padding: 10px;
   background-color: #333;
 }
+
 .nav a {
   color: white;
   margin: 0 10px;
