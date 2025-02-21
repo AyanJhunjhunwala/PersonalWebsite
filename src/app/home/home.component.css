@@ -168,8 +168,8 @@ main.main {
   color: #fff;
 }
 .profile-pic {
-  width: 140px;
-  height: 140px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
@@ -445,10 +445,8 @@ main.main {
 /* Grid container for project cards */
 .projects-grid {
   display: grid;
-  gap: 2rem;
-  /* For a responsive layout, auto-fit columns at 300px min */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  margin-top: 2rem;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 1.5rem; /* Adjust gap as needed */
   padding: 1rem;
 }
 
@@ -462,12 +460,17 @@ main.main {
   text-align: center;
   color: #fff;
   transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
+  max-width: 420px;   /* Limit card width */
+  }  /* Center card with vertical spacing */
+  .project-card, .project-card * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+  }
 /* Slight scale on hover for the entire card */
 .project-card:hover {
-  transform: scale(1.03);
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.048);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Project image styling */
@@ -476,7 +479,7 @@ main.main {
   height: auto;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 
 /* Title & description spacing */
@@ -489,12 +492,51 @@ main.main {
   line-height: 1.4;
   margin-bottom: 1rem;
 }
+.project-card {
+  /* Other existing styles (background, border-radius, etc.) */
+  text-align: center; /* This centers inline/inline-flex children horizontally */
+}
+.icon-links {
+  display: flex;
+  gap: 0.75rem; /* Space between icons */
+  justify-content: center; 
+  margin-top: .5rem;
+}
 
+/* A small circular "pill" for the icons */
+  .icon-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 30%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0 0.75rem 0;
+}
+.p {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+/* Hover effect to match your style */
+.icon-link:hover {
+  transform: scale(1.1);
+}
+
+/* Icon size */
+.icon-link img {
+  width: 30px;
+  height: 30px;
+} 
 /* GitHub link reuses .pill style, but with an icon & text */
 .github-link {
-  display: inline-flex;
+
   align-items: center;
-  gap: 0.5rem;
+
   background-color: rgba(255, 255, 255, 0.2);
   /* Optionally, override text color if you want darker text on the pill:
      color: #333; 
@@ -524,7 +566,10 @@ main.main {
   padding: 10px;
   background-color: #333;
 }
-
+#projects h1 {
+  font-size: 3rem;      /* Adjust as needed */
+  margin-bottom: 1rem;  /* Add some spacing below */
+}
 .nav a {
   color: white;
   margin: 0 10px;
