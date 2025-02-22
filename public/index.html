@@ -4,12 +4,26 @@
   <meta charset="utf-8">
   <title>Ayan J</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1rem">
   <link rel="icon" type="image/x-icon" href="favicon.svg">
 </head>
 <body>
   <app-root></app-root>
   <projectpage-root></projectpage-root>
-  
+  <script>
+    // Make scrollToSection available globally
+    window.scrollToSection = function(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    // Update CSS variables for cursor position on mousemove
+    document.addEventListener('mousemove', (e) => {
+      document.documentElement.style.setProperty('--cursor-x', e.clientX + 'px');
+      document.documentElement.style.setProperty('--cursor-y', e.clientY + 'px');
+    });
+  </script>
 </body>
 </html>
