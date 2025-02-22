@@ -441,39 +441,55 @@ main.main {
 /************************************************
    Projects Section
 ************************************************/
-
-/* Grid container for project cards */
+/* Two columns: left is bigger, right is smaller */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
-  gap: 1.5rem; /* Adjust gap as needed */
-  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 3fr 2fr;
+  /* 2 rows, so big project is row 1, small is row 2 */  padding: 1rem;
+  margin-top: 2rem;
+  align-items: start;
+  justify-items: center
+  /* optionally: justify-items: start; if you prefer left alignment in each column */
 }
 
-/* Individual project card with glassy background */
+/* Common project-card styles */
 .project-card {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(6px);
   border-radius: 1rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   padding: 1.5rem;
-  text-align: center;
   color: #fff;
+  text-align: center;
   transition: transform 0.3s ease, background-color 0.3s ease;
-  max-width: 420px;   /* Limit card width */
-  }  /* Center card with vertical spacing */
-  .project-card, .project-card * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translateZ(0);
-  }
+  max-width: none;
+}
+
+/* Let the big project fill the entire left column */
+.big-project {
+  width: 65%;   
+  grid-column: 1;
+  grid-row: span 2;
+   /* fill the 2fr column */
+}
+
+/* If you want the small project narrower, you can keep a max-width on it */
+.small-project {
+  width: 60%;
+  grid-column: 2;
+  grid-row: span 2;
+  /* fill the 1fr column */
+}
+
 /* Slight scale on hover for the entire card */
 .project-card:hover {
   background-color: rgba(255, 255, 255, 0.048);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Project image styling */
+/* Images fill the card width if present */
 .project-card img {
   width: 100%;
   height: auto;
@@ -481,6 +497,7 @@ main.main {
   margin-bottom: 1rem;
   object-fit: cover;
 }
+
 
 /* Title & description spacing */
 .project-card h3 {
@@ -492,10 +509,7 @@ main.main {
   line-height: 1.4;
   margin-bottom: 1rem;
 }
-.project-card {
-  /* Other existing styles (background, border-radius, etc.) */
-  text-align: center; /* This centers inline/inline-flex children horizontally */
-}
+
 .icon-links {
   display: flex;
   gap: 0.75rem; /* Space between icons */
