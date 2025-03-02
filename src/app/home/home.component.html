@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ayan's Portfolio</title>
   <link rel="stylesheet" href="home.component.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
+
 <body>
   <!-- Gradient Background Container -->
+   <div id="splash"></div>
   <div class="gradient-bg">
     <svg>
       <defs>
@@ -146,7 +149,7 @@
         </div>
         
         <div class="project-card small-project">
-
+          <img src="/reddit.webp"/>
           <h3>Reddit Reviewer</h3>
           <p>
             This project leverages Beautiful Soup to scrape Reddit threads for real-life user experiences about specific products. The collected data is then processed using an optimized Hugging Face NLP model, allowing for accurate sentiment and topic analysis. Finally, the results are visualized to help users quickly gauge community opinions and make informed decisions.
