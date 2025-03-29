@@ -162,6 +162,64 @@ main.main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   border: 4px solid #fff;
 }
+
+/* Typing Animation Styles */
+.main-heading-container {
+  display: flex;
+  align-items: center;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  min-height: 4rem;
+  color: white;
+}
+
+.subtitle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* This centers the content horizontally */
+  width: 100%; /* Ensure the container takes full width */
+  font-size: 1.2rem;
+  margin: 0.25rem auto; /* Center with auto margins */
+  min-height: 1.5rem;
+  color: white;
+  text-align: center; /* Ensure text is centered */
+}
+
+.fade-in-text {
+  width: 100%;
+  text-align: center; /* Center the third line as well */
+}
+
+
+.typing-text {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: white;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.fade-in-text {
+  opacity: 0;
+  font-size: 1.2rem;
+  margin: 0.25rem 0;
+  color: white;
+}
+
+/* Original intro styles */
 .intro h1 {
   font-size: 3.5rem;
   margin: 0.5rem 0;
@@ -199,6 +257,103 @@ main.main {
   margin-right: 8px;
 }
 
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(45deg, #121218, #1a1a2e, #16213e); /* Dark blackish base */
+  z-index: 1;
+}
+
+/* Updated gradient blobs to match purple/blue theme */
+.gradient-bg .g1 {
+  background: radial-gradient(circle at center, rgba(168, 149, 192, 0.5) 0, rgba(168, 149, 192, 0) 50%); /* Soft purple */
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2);
+  left: calc(50% - var(--circle-size, 80%) / 2);
+  transform-origin: center center;
+  animation: moveVertical 30s ease infinite;
+  opacity: 0.8;
+}
+
+.gradient-bg .g2 {
+  background: radial-gradient(circle at center, rgba(140, 176, 194, 0.5) 0, rgba(140, 176, 194, 0) 50%); /* Soft blue */
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2);
+  left: calc(50% - var(--circle-size, 80%) / 2);
+  transform-origin: calc(50% - 400px);
+  animation: moveInCircle 20s reverse infinite;
+  opacity: 0.7;
+}
+
+.gradient-bg .g3 {
+  background: radial-gradient(circle at center, rgba(108, 91, 123, 0.6) 0, rgba(108, 91, 123, 0) 50%); /* Deeper purple */
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2 + 200px);
+  left: calc(50% - var(--circle-size, 80%) / 2 - 500px);
+  transform-origin: calc(50% + 400px);
+  animation: moveInCircle 40s linear infinite;
+  opacity: 0.7;
+}
+
+.gradient-bg .g4 {
+  background: radial-gradient(circle at center, rgba(73, 88, 103, 0.5) 0, rgba(73, 88, 103, 0) 50%); /* Dark blue-gray */
+  width: var(--circle-size, 80%);
+  height: var(--circle-size, 80%);
+  top: calc(50% - var(--circle-size, 80%) / 2);
+  left: calc(50% - var(--circle-size, 80%) / 2);
+  transform-origin: calc(50% - 200px);
+  animation: moveHorizontal 40s ease infinite;
+  opacity: 0.6;
+}
+
+.gradient-bg .g5 {
+  background: radial-gradient(circle at center, rgba(187, 169, 221, 0.4) 0, rgba(187, 169, 221, 0) 50%); /* Light lavender */
+  width: calc(var(--circle-size, 80%) * 2);
+  height: calc(var(--circle-size, 80%) * 2);
+  top: calc(50% - var(--circle-size, 80%));
+  left: calc(50% - var(--circle-size, 80%));
+  transform-origin: calc(50% - 800px) calc(50% + 200px);
+  animation: moveInCircle 20s ease infinite;
+  opacity: 0.5;
+}
+
+/* Updated Interactive layer using cursor position */
+.gradient-bg .interactive {
+  background: radial-gradient(
+    circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+    rgba(168, 149, 192, 0.6) 0%,
+    rgba(140, 176, 194, 0.3) 40%,
+    rgba(22, 33, 62, 0) 70%
+  );
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+
+/* Splash Screen update */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #121218, #1a1a2e, #16213e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease forwards;
+}
 /* Modern, Rounded, Dark Tab Navigation */
 .tab-navigation {
   position: fixed;
@@ -483,8 +638,8 @@ main.main {
   margin: 0 10px;
   text-decoration: none;
 }
-create splash screen
 
+/* Splash Screen */
 .splash {
   position: fixed;
   top: 0;

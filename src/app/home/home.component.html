@@ -4,13 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ayan's Portfolio</title>
-  <link rel="stylesheet" href="home.component.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
 
 <body>
   <!-- Gradient Background Container -->
-   <div id="splash"></div>
+  <div id="splash"></div>
   <div class="gradient-bg">
     <svg>
       <defs>
@@ -51,11 +49,22 @@
     <main class="main">
       <div class="content">
         <section class="intro">
-          <img src="/yan.png" alt="Ayan's profile picture" class="profile-pic" />
-          <h1>Hi, I'm Ayan!</h1>
-          <p>CS &#64; UCI</p>
-          <p>Building AI &amp; ML platforms daily</p>
+          <img src="/prof.png" alt="Ayan's profile picture" />
+          
+          <!-- Typing container for main heading -->
+          <div class="main-heading-container">
+            <span #typingTarget class="typing-text"></span><span #mainCursor class="cursor"></span>
+          </div>
+          
+          <!-- Typing container for subtitle -->
+          <div class="subtitle-container">
+            <span #subText class="typing-text"></span><span #subCursor class="cursor"></span>
+          </div>
+          
+          <!-- Static text that fades in after typing -->
+          <p class="fade-in-text">Building AI &amp; ML platforms daily</p>
         </section>
+        
         <section class="links">
           <div class="pill-group">
             <a
@@ -89,146 +98,157 @@
   </section>
 
   <!-- Projects Section -->
-  <!-- Projects Section -->
-<section id="projects">
-  <main class="main">
-    <div class="content">
-
-      <h1>Projects</h1>
-      <section class="projects-grid">
-        <div class="project-card big-project">
-          <img src="/bitebuddies.jpg" alt="BiteBuddies" />
-          <h3>BiteBuddies</h3>
-          <p>
-            BiteBuddies connects people through food to ease transitions and reduce waste.
-            Users build virtual pantries with OCR-enabled receipt scanning and get recipe
-            suggestions. The iOS app in Swift communicates with a Flask API via RESTful
-            endpoints. The Flask API integrates Spoonacular for food classification and
-            manages user data.
-          </p>
-          <!-- Icon Links Container -->
-          <div class="icon-links">
-            <!-- GitHub Icon -->
-            <a
-              class="icon-link"
-              href="https://github.com/AyanJhunjhunwala/BiteBuddie"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                alt="GitHub Logo"
-              />
-            </a>
-            <!-- YouTube Icon -->
-            <a
-              class="icon-link"
-              href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-                alt="YouTube"
-              />
-            </a>
+  <section id="projects">
+    <main class="main">
+      <div class="content">
+        <h1>Projects</h1>
+        <section class="projects-grid">
+          <div class="project-card big-project">
+            <img src="/bitebuddies.jpg" alt="BiteBuddies" />
+            <h3>BiteBuddies</h3>
+            <p>
+              BiteBuddies connects people through food to ease transitions and reduce waste.
+              Users build virtual pantries with OCR-enabled receipt scanning and get recipe
+              suggestions. The iOS app in Swift communicates with a Flask API via RESTful
+              endpoints. The Flask API integrates Spoonacular for food classification and
+              manages user data.
+            </p>
+            <!-- Icon Links Container -->
+            <div class="icon-links">
+              <!-- GitHub Icon -->
+              <a
+                class="icon-link"
+                href="https://github.com/AyanJhunjhunwala/BiteBuddie"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                  alt="GitHub Logo"
+                />
+              </a>
+              <!-- YouTube Icon -->
+              <a
+                class="icon-link"
+                href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                  alt="YouTube"
+                />
+              </a>
+            </div>
           </div>
-        </div>
-        
-        
-        
-        <div class="project-card big-project">
-          <img src="/guitar.jpeg"/>
-          <h3>ChordWizard</h3>
-          <p>
-            ChordWizard is a real-time chord recognition system using OpenCV for video capture and a custom CNN model for finger-position-based chord identification. It integrates TensorFlow/Keras for deep learning, MediaPipe for hand tracking, and PyTorch for dataset preprocessing. Features include a chord progression trainer and a song request learner for guided practice. I am building a custom dataset and incorporating external training data to enhance accuracy across diverse playing styles.
-          </p>
-          <!-- Icon Links Container -->
           
-          <h2>Looking for Collaborators</h2>
-        </div>
-        
-        <div class="project-card small-project">
-          <img src="/reddit.webp"/>
-          <h3>Reddit Reviewer</h3>
-          <p>
-            This project leverages Beautiful Soup to scrape Reddit threads for real-life user experiences about specific products. The collected data is then processed using an optimized Hugging Face NLP model, allowing for accurate sentiment and topic analysis. Finally, the results are visualized to help users quickly gauge community opinions and make informed decisions.
-          </p>
-          <a
-              class="icon-link"
-              href="https://github.com/AyanJhunjhunwala/RedditReviewer"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                alt="GitHub Logo"
-              />
-            </a>
-        </div>
-        <div class="project-card small-project">
-          <img src="/monte.jpg"/>
-          <h3>Monte Carlo Options Pricing</h3>
-          <p>
-            Developed a Monte Carlo simulation in Python to price financial derivatives and assess risk metrics. Generated stochastic price
-paths for trending tickers, visualized price distributions, and calculated VaR & CVaR to quantify downside risks. Achieved pricing
-within 2% of expected outcomes
-          </p>
-          <a
-              class="icon-link"
-              href="https://github.com/AyanJhunjhunwala/optionspricing"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                alt="GitHub Logo"
-              />
-            </a>
-        </div>
-      </section>
-    </div>
-  </main>
-</section>
-
-
-
-
-
+          <div class="project-card big-project">
+            <img src="/guitar.jpeg"/>
+            <h3>ChordWizard</h3>
+            <p>
+              ChordWizard is a real-time chord recognition system using OpenCV for sound and MEL spectrogram analysis. The system detects and displays the guitar chord. The project is trained on a custom dataset from Kaggle and it is also optimized to recommend chord prgressions and allows you to chose your own.
+            </p>
+            <!-- Icon Links Container -->
+            <div class="icon-links">
+              <!-- GitHub Icon -->
+              <a
+                class="icon-link"
+                href="https://github.com/AyanJhunjhunwala/ChordWizard"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                  alt="GitHub Logo"
+                />
+              </a>
+              <!-- YouTube Icon -->
+              <a
+                class="icon-link"
+                href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                  alt="YouTube"
+                />
+              </a>
+            </div>
+          </div>
+          
+          <div class="project-card small-project">
+            <img src="/reddit.webp"/>
+            <h3>Reddit Reviewer</h3>
+            <p>
+              This project leverages Beautiful Soup to scrape Reddit threads for real-life user experiences about specific products. The collected data is then processed using an optimized Hugging Face NLP model, allowing for accurate sentiment and topic analysis. Finally, the results are visualized to help users quickly gauge community opinions and make informed decisions.
+            </p>
+            <a
+                class="icon-link"
+                href="https://github.com/AyanJhunjhunwala/RedditReviewer"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                  alt="GitHub Logo"
+                />
+              </a>
+          </div>
+          
+          <div class="project-card small-project">
+            <img src="/monte.jpg"/>
+            <h3>Monte Carlo Options Pricing</h3>
+            <p>
+              Developed a Monte Carlo simulation in Python to price financial derivatives and assess risk metrics. Generated stochastic price
+              paths for trending tickers, visualized price distributions, and calculated VaR & CVaR to quantify downside risks. Achieved pricing
+              within 2% of expected outcomes
+            </p>
+            <a
+                class="icon-link"
+                href="https://github.com/AyanJhunjhunwala/optionspricing"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                  alt="GitHub Logo"
+                />
+              </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </section>
 
   <!-- Contact Section -->
-<!-- Contact Section -->
-<!-- Contact Section -->
-<section id="contact" class="contact-page">
-  <main class="main">
-    <div class="content">
-      <!-- Banner -->
-      <div class="contact-banner">
-        <h2>Got a project idea or just want to chat?</h2>
-        <p>
-          I'd love to hear from you. Whether you're brainstorming something new, 
-          looking to collaborate, or just want to say hello—feel free to reach out!
-        </p>
-      </div>
-      <!-- Email Link -->
-      <a class="pill email-link" href="mailto:ajhunjh1@uci.edu">
-        Get in Touch
-      </a>
-      <div class="pacman-container">
-        <div class="pacman"></div>
-        <div class="path">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+  <section id="contact" class="contact-page">
+    <main class="main">
+      <div class="content">
+        <!-- Banner -->
+        <div class="contact-banner">
+          <h2>Got a project idea or just want to chat?</h2>
+          <p>
+            I'd love to hear from you. Whether you're brainstorming something new, 
+            looking to collaborate, or just want to say hello—feel free to reach out!
+          </p>
+        </div>
+        <!-- Email Link -->
+        <a class="pill email-link" href="mailto:ajhunjh1@uci.edu">
+          Get in Touch
+        </a>
+        <div class="pacman-container">
+          <div class="pacman"></div>
+          <div class="path">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
       </div>
-    </div>
-    
-  </main>
-</section>
-
-
+    </main>
+  </section>
 
   <!-- Smooth Scroll JavaScript -->
   <script>
