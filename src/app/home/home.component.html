@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ayan Jhunjhunwala - CS @ UCI. Portfolio showcasing projects in AI, ML, and software development. Experienced in Python, React, Angular, and more." />
   <title>Ayan's Portfolio</title>
 </head>
 
 <body>
+  <!-- Loading Animation -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loader">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </div>
+
   <!-- Gradient Background Container -->
   <div id="splash"></div>
   <div class="gradient-bg">
@@ -40,6 +50,7 @@
   <!-- Simple Pill-like Navigation -->
   <div class="tab-navigation">
     <button onclick="scrollToSection('home')">Home</button>
+    <button onclick="scrollToSection('experience')">Experience</button>
     <button onclick="scrollToSection('projects')">Projects</button>
     <button onclick="scrollToSection('contact')">Contact</button>
   </div>
@@ -49,7 +60,7 @@
     <main class="main">
       <div class="content">
         <section class="intro">
-          <img src="/prof1.png" alt="Ayan's profile picture" class ="profile-pic" />
+          <img src="/prof1.png" alt="Ayan's profile picture" class="profile-pic" />
           
           <!-- Typing container for main heading -->
           <div class="main-heading-container">
@@ -97,134 +108,256 @@
     </main>
   </section>
 
+  <!-- Experience Section -->
+  <section id="experience" class="experience-section">
+    <main class="main">
+      <div class="content">
+        <h1 class="section-title">Experience</h1>
+        <div class="timeline">
+          <!-- Experience Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>ML Researcher</h3>
+                <span class="company">UC Irvine</span>
+                <span class="date">Present</span>
+              </div>
+              <div class="timeline-body">
+                <p>Currently conducting machine learning research at UC Irvine, focusing on advanced neural network architectures and their applications.</p>
+                <div class="skills-container">
+                  <span class="skill-tag">PyTorch</span>
+                  <span class="skill-tag">Deep Learning</span>
+                  <span class="skill-tag">Research</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>IBM Apprentice</h3>
+                <span class="company">Accelerate 2024</span>
+                <span class="date">May 2024 - July 2024</span>
+              </div>
+              <div class="timeline-body">
+                <p>Worked with the AI & Research branch at IBM, testing both open-source LLMs as well as developing my own using Python and IBM Watson. Accelerate has an acceptance rate of sub 5%.</p>
+                <p>Gained expertise in developing and scaling LLMs using Tensorflow and DeepSpeed, optimizing resource allocation, learned about IBM's hybrid cloud solutions, understanding how to work to enhance flexibility, security, and efficiency in cloud computing environments.</p>
+                <div class="skills-container">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Pandas</span>
+                  <span class="skill-tag">IBM Watson</span>
+                  <span class="skill-tag">IBM Cloud</span>
+                  <span class="skill-tag">Tensorflow</span>
+                  <span class="skill-tag">DeepSpeed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Research Assistant</h3>
+                <span class="company">ICANN - San Jose State University</span>
+                <span class="date">August 2022 - January 2023</span>
+              </div>
+              <div class="timeline-body">
+                <p>Wrote an algorithm to rank top 8% of submissions in the RSNA Cervical Spine Fracture Detection Challenge.</p>
+                <p>Worked on a mentored research paper that analyzed different types of neural network architectures and determined which ones were most efficient for fractures. Fine tuned ResNet to fit fracture data.</p>
+                <div class="skills-container">
+                  <span class="skill-tag">Pandas</span>
+                  <span class="skill-tag">Matplotlib</span>
+                  <span class="skill-tag">Scikit-learn</span>
+                  <span class="skill-tag">Git</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
   <!-- Projects Section -->
   <section id="projects">
     <main class="main">
       <div class="content">
-        <h1>Projects</h1>
-        <section class="projects-grid">
+        <h1 class="section-title">Projects</h1>
+        <div class="projects-container">
+          <!-- Left Arrow -->
+          <div class="scroll-arrow left" (click)="scrollProjects('left')"></div>
           
-          
-          <div class="project-card big-project">
-            <img src="/guitar.jpeg"/>
-            <h3>ChordWizard</h3>
-            <p>
-              ChordWizard is a real-time chord recognition system using OpenCV for sound and MEL spectrogram analysis. The system detects and displays the guitar chord. The project is trained on a custom dataset from Kaggle and it is also optimized to recommend chord prgressions and allows you to chose your own.
-            </p>
-            <!-- Icon Links Container -->
-            <div class="icon-links">
-              <!-- GitHub Icon -->
-              <a
-                class="icon-link"
-                href="https://github.com/AyanJhunjhunwala/ChordWizard"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                  alt="GitHub Logo"
-                />
-              </a>
-              <!-- YouTube Icon -->
-              <a
-                class="icon-link"
-                href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-                  alt="YouTube"
-                />
-              </a>
+          <!-- Project Cards -->
+          <section class="projects-grid" #projectsContainer 
+                  (mouseenter)="isHovering = true" 
+                  (mouseleave)="isHovering = false">
+            
+            <div class="project-card">
+              <img src="/guitar.jpeg" alt="ChordWizard"/>
+              <h3>ChordWizard</h3>
+              <p>
+                ChordWizard is a real-time chord recognition system using OpenCV for sound and MEL spectrogram analysis. The system detects and displays the guitar chord. The project is trained on a custom dataset from Kaggle and it is also optimized to recommend chord progressions and allows you to choose your own.
+              </p>
+              <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">ML</span>
+                <span class="skill-tag">Audio Processing</span>
+              </div>
+              <!-- Icon Links Container -->
+              <div class="icon-links">
+                <!-- GitHub Icon -->
+                <a
+                  class="icon-link"
+                  href="https://github.com/AyanJhunjhunwala/ChordWizard"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                    alt="GitHub Logo"
+                  />
+                </a>
+                <!-- YouTube Icon -->
+                <a
+                  class="icon-link"
+                  href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                    alt="YouTube"
+                  />
+                </a>
+              </div>
             </div>
-          </div>
-          
-          <div class="project-card small-project">
-            <img src="/reddit.webp"/>
-            <h3>Reddit Reviewer</h3>
-            <p>
-              This project leverages Beautiful Soup to scrape Reddit threads for real-life user experiences about specific products. The collected data is then processed using an optimized Hugging Face NLP model, allowing for accurate sentiment and topic analysis. Finally, the results are visualized to help users quickly gauge community opinions and make informed decisions.
-            </p>
-            <a
-                class="icon-link"
-                href="https://github.com/AyanJhunjhunwala/RedditReviewer"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                  alt="GitHub Logo"
-                />
-              </a>
-          </div>
-          <div class="project-card big-project">
-            <img src="/bitebuddies.jpg" alt="BiteBuddies" />
-            <h3>BiteBuddies</h3>
-            <p>
-              BiteBuddies connects people through food to ease transitions and reduce waste.
-              Users build virtual pantries with OCR-enabled receipt scanning and get recipe
-              suggestions. The iOS app in Swift communicates with a Flask API via RESTful
-              endpoints. The Flask API integrates Spoonacular for food classification and
-              manages user data.
-            </p>
-            <!-- Icon Links Container -->
-            <div class="icon-links">
-              <!-- GitHub Icon -->
-              <a
-                class="icon-link"
-                href="https://github.com/AyanJhunjhunwala/BiteBuddie"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                  alt="GitHub Logo"
-                />
-              </a>
-              <!-- YouTube Icon -->
-              <a
-                class="icon-link"
-                href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-                  alt="YouTube"
-                />
-              </a>
+            
+            <div class="project-card">
+              <img src="/reddit.webp" alt="Reddit Reviewer"/>
+              <h3>Reddit Reviewer</h3>
+              <p>
+                This project leverages Beautiful Soup to scrape Reddit threads for real-life user experiences about specific products. The collected data is then processed using an optimized Hugging Face NLP model, allowing for accurate sentiment and topic analysis. Finally, the results are visualized to help users quickly gauge community opinions and make informed decisions.
+              </p>
+              <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">NLP</span>
+                <span class="skill-tag">BeautifulSoup</span>
+                <span class="skill-tag">Hugging Face</span>
+              </div>
+              <div class="icon-links">
+                <a
+                    class="icon-link"
+                    href="https://github.com/AyanJhunjhunwala/RedditReviewer"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                      alt="GitHub Logo"
+                    />
+                  </a>
+              </div>
             </div>
-          </div>
-          <div class="project-card small-project">
-            <img src="/monte.jpg"/>
-            <h3>Monte Carlo Options Pricing</h3>
-            <p>
-              Developed a Monte Carlo simulation in Python to price financial derivatives and assess risk metrics. Generated stochastic price
-              paths for trending tickers, visualized price distributions, and calculated VaR & CVaR to quantify downside risks. Achieved pricing
-              within 2% of expected outcomes
-            </p>
-            <a
-                class="icon-link"
-                href="https://github.com/AyanJhunjhunwala/optionspricing"
-                target="_blank"
-                rel="noopener"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                  alt="GitHub Logo"
-                />
-              </a>
-          </div>
-          <div class="project-card small-project">
-            <img src="/trackv.png"/>
-            <h3>TrackVest</h3>
-            <p>
-              Portfolio dashboard for tracking all types of investments.(stocks, crypto, real estate, etc.). Focusing on news based sentiment analysis and also with a special section on ESG for the average retail investor
-            </p>  
-            <h3>Looking for Contributors</h3>
-          </div>
-        </section>
+            <div class="project-card">
+              <img src="/bitebuddies.jpg" alt="BiteBuddies" />
+              <h3>BiteBuddies</h3>
+              <p>
+                BiteBuddies connects people through food to ease transitions and reduce waste.
+                Users build virtual pantries with OCR-enabled receipt scanning and get recipe
+                suggestions. The iOS app in Swift communicates with a Flask API via RESTful
+                endpoints. The Flask API integrates Spoonacular for food classification and
+                manages user data.
+              </p>
+              <div class="skills-container">
+                <span class="skill-tag">Swift</span>
+                <span class="skill-tag">Flask</span>
+                <span class="skill-tag">OCR</span>
+                <span class="skill-tag">API</span>
+              </div>
+              <!-- Icon Links Container -->
+              <div class="icon-links">
+                <!-- GitHub Icon -->
+                <a
+                  class="icon-link"
+                  href="https://github.com/AyanJhunjhunwala/BiteBuddie"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                    alt="GitHub Logo"
+                  />
+                </a>
+                <!-- YouTube Icon -->
+                <a
+                  class="icon-link"
+                  href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                    alt="YouTube"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="/monte.jpg" alt="Monte Carlo Options Pricing"/>
+              <h3>Monte Carlo Options Pricing</h3>
+              <p>
+                Developed a Monte Carlo simulation in Python to price financial derivatives and assess risk metrics. Generated stochastic price
+                paths for trending tickers, visualized price distributions, and calculated VaR & CVaR to quantify downside risks. Achieved pricing
+                within 2% of expected outcomes.
+              </p>
+              <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Finance</span>
+                <span class="skill-tag">Statistics</span>
+                <span class="skill-tag">Data Visualization</span>
+              </div>
+              <div class="icon-links">
+                <a
+                    class="icon-link"
+                    href="https://github.com/AyanJhunjhunwala/optionspricing"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                      alt="GitHub Logo"
+                    />
+                  </a>
+              </div>
+            </div>
+            <div class="project-card trackvest-card">
+              <img src="/trackv.png" alt="TrackVest"/>
+              <h3>TrackVest</h3>
+              <p>
+                Portfolio dashboard for tracking all types of investments (stocks, crypto, real estate, etc.). Focusing on news based sentiment analysis and also with a special section on ESG for the average retail investor.
+              </p>
+              <div class="skills-container">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Finance</span>
+                <span class="skill-tag">API</span>
+                <span class="skill-tag">Sentiment Analysis</span>
+              </div>
+              <div class="contributor-badge-container">
+                <div class="contributor-badge">Looking for Contributors</div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Right Arrow -->
+          <div class="scroll-arrow right" (click)="scrollProjects('right')"></div>
+        </div>
       </div>
     </main>
   </section>
@@ -257,6 +390,13 @@
       </div>
     </main>
   </section>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" onclick="scrollToSection('home')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
 
   <!-- Smooth Scroll JavaScript -->
   <script>
