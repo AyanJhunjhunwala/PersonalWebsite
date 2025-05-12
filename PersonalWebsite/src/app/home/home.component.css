@@ -1,0 +1,47 @@
+/* Project links styling - icon only without backgrounds */
+.project-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.icon-link:hover {
+  transform: translateY(-5px) scale(1.15);
+}
+
+.icon-link img {
+  width: 30px;
+  height: 30px;
+  transition: filter 0.3s ease;
+}
+
+/* GitHub icon - white version */
+.icon-link img[alt="GitHub"] {
+  filter: invert(1);
+}
+
+/* YouTube icon - no filter needed as it's already colorful */
+.icon-link img[alt="YouTube"] {
+  width: 32px;
+  height: 32px;
+}
+
+/* Smooth scrolling */
+.projects-grid {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* For better scrolling on iOS */
+}
+
+/* Project card smooth transition */
+.project-card {
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+} 

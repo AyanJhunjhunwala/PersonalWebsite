@@ -20,22 +20,20 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   subTextToType = "CS @ UCI";
   cursorPosition = { x: 50, y: 50 }; // Default cursor position
   
-  // For auto-scrolling
-  private autoScrollInterval: any;
-  public isHovering = false;
-  private scrollAmount = 0.8; // Scroll speed (pixels per interval)
+  // Removed autoScroll related properties
+  private scrollContainer!: HTMLElement;
   
   constructor(private renderer: Renderer2) {}
   
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    // Update cursor position for interactive gradient
+    // Calculate cursor position as percentage of window
     this.cursorPosition = {
       x: (event.clientX / window.innerWidth) * 100,
       y: (event.clientY / window.innerHeight) * 100
     };
     
-    // Update the interactive gradient position
+    // Update interactive gradient position
     const interactive = document.querySelector('.interactive') as HTMLElement;
     if (interactive) {
       interactive.style.setProperty('--cursor-x', `${this.cursorPosition.x}%`);
@@ -45,7 +43,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    // Show/hide back to top button based on scroll position
     const backToTopButton = document.getElementById('back-to-top');
     if (backToTopButton) {
       if (window.scrollY > 300) {
@@ -54,34 +51,25 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         backToTopButton.classList.remove('visible');
       }
     }
-    
-    // Animate project cards on scroll
     this.animateOnScroll();
   }
   
   @HostListener('window:load', [])
   onWindowLoad() {
-    // Hide loading screen when the window is fully loaded
     this.hideLoadingScreen();
   }
   
   ngAfterViewInit() {
-    // Wait a brief moment to ensure view is ready
     setTimeout(() => {
-      // Hide loading screen
       this.hideLoadingScreen();
       
       this.typeText(this.typingTarget.nativeElement, this.textToType, 0, () => {
-        // Hide the first cursor
         this.renderer.setStyle(this.mainCursor.nativeElement, 'display', 'none');
         
-        // After main text is typed, start typing subtitle
         setTimeout(() => {
           this.typeText(this.subText.nativeElement, this.subTextToType, 0, () => {
-            // Hide the second cursor
             this.renderer.setStyle(this.subCursor.nativeElement, 'display', 'none');
             
-            // After both texts are typed, fade in the remaining paragraph
             const buildingText = document.querySelector('.fade-in-text') as HTMLElement;
             if (buildingText) {
               buildingText.style.opacity = '1';
@@ -91,28 +79,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         }, 300);
       });
       
-      // Initialize smooth scrolling for navigation buttons
       this.initSmoothScrolling();
-
-      // Initialize back to top button and animations
       this.onWindowScroll();
-      
-      // Add animation classes to project cards
       this.setupProjectCards();
-      
-      // Start the infinite scroll with a delay to ensure DOM is fully ready
-      setTimeout(() => {
-        this.startInfiniteScroll();
-      }, 1000);
-      
-    }, 1500); // Longer delay to show loading animation
+      this.initProjectScrolling();
+    }, 1500);
   }
   
   ngOnDestroy() {
-    // Clear the auto-scroll interval when component is destroyed
-    if (this.autoScrollInterval) {
-      clearInterval(this.autoScrollInterval);
-    }
+    // Cleanup resources if needed
   }
   
   hideLoadingScreen() {
@@ -128,8 +103,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       (card as HTMLElement).style.setProperty('--card-index', index.toString());
       (card as HTMLElement).classList.add('animate-on-scroll');
     });
-    
-    // Trigger initial animation check
     this.animateOnScroll();
   }
   
@@ -137,11 +110,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     
     animatedElements.forEach((element) => {
-      const elementTop = element.getBoundingClientRect().top;
-      const elementBottom = element.getBoundingClientRect().bottom;
-      const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom > 0);
-      
-      if (isVisible) {
+      const top = element.getBoundingClientRect().top;
+      const bottom = element.getBoundingClientRect().bottom;
+      if (top < window.innerHeight - 100 && bottom > 0) {
         element.classList.add('animated');
       }
     });
@@ -150,9 +121,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   typeText(element: HTMLElement, text: string, index: number, callback: () => void) {
     if (index < text.length) {
       element.textContent += text.charAt(index);
-      setTimeout(() => {
-        this.typeText(element, text, index + 1, callback);
-      }, 100);
+      setTimeout(() => this.typeText(element, text, index + 1, callback), 100);
     } else {
       callback();
     }
@@ -172,50 +141,96 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   
   scrollToSection(sectionId: string) {
     const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Horizontal scrolling functionality for manual navigation with arrows
-  scrollProjects(direction: string) {
-    if (!this.projectsContainer) return;
+  initProjectScrolling() {
+    const container = document.querySelector('.projects-grid') as HTMLElement;
+    if (!container) {
+      console.error('Projects grid container not found');
+      return;
+    }
+    this.scrollContainer = container;
     
-    const container = this.projectsContainer.nativeElement;
-    const cardWidth = 450; // Updated to match new CSS width
-    const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+    const leftArrow = document.querySelector('.scroll-arrow.left') as HTMLElement;
+    const rightArrow = document.querySelector('.scroll-arrow.right') as HTMLElement;
     
-    container.scrollBy({ 
-      left: scrollAmount, 
-      behavior: 'smooth' 
-    });
-  }
-  
-  // Infinite scrolling implementation
-  startInfiniteScroll() {
-    if (!this.projectsContainer?.nativeElement) return;
-    
-    const container = this.projectsContainer.nativeElement;
-    
-    this.autoScrollInterval = setInterval(() => {
-      if (this.isHovering) return;
+    if (leftArrow && rightArrow) {
+      // Calculate the scroll distance (one card width + gap)
+      const calculateScrollDistance = () => {
+        const projectCard = document.querySelector('.project-card') as HTMLElement;
+        const cardWidth = projectCard ? projectCard.offsetWidth : 450;
+        const gap = 30; // gap between cards as defined in CSS
+        return cardWidth + gap;
+      };
       
-      // Get the total scroll width and current position
-      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      // Scroll left when clicking the left arrow
+      leftArrow.addEventListener('click', () => {
+        const scrollDistance = calculateScrollDistance();
+        container.scrollBy({ 
+          left: -scrollDistance, 
+          behavior: 'smooth' 
+        });
+      });
       
-      // If near the end, set up a reset to the beginning for infinite effect
-      if (container.scrollLeft >= maxScrollLeft - 10) {
-        // Do a quick reset to the beginning with no animation
-        container.style.scrollBehavior = 'auto';
-        container.scrollLeft = 0;
-        // Restore smooth scrolling
-        setTimeout(() => {
-          container.style.scrollBehavior = 'smooth';
-        }, 50);
-      } else {
-        // Normal scrolling
-        container.scrollLeft += this.scrollAmount;
-      }
-    }, 20); // Lower value = faster scroll
+      // Scroll right when clicking the right arrow
+      rightArrow.addEventListener('click', () => {
+        const scrollDistance = calculateScrollDistance();
+        container.scrollBy({ 
+          left: scrollDistance, 
+          behavior: 'smooth' 
+        });
+      });
+      
+      // Show/hide arrows based on scroll position
+      const toggleArrowVisibility = () => {
+        const isAtStart = container.scrollLeft <= 10;
+        const isAtEnd = container.scrollLeft >= (container.scrollWidth - container.clientWidth - 10);
+        
+        leftArrow.style.opacity = isAtStart ? '0.3' : '0.7';
+        leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+        
+        rightArrow.style.opacity = isAtEnd ? '0.3' : '0.7';
+        rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+      };
+      
+      // Add scroll event listener to toggle arrow visibility
+      container.addEventListener('scroll', toggleArrowVisibility);
+      
+      // Initialize arrow visibility
+      toggleArrowVisibility();
+      
+      // Handle keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          leftArrow.click();
+        } else if (e.key === 'ArrowRight') {
+          rightArrow.click();
+        }
+      });
+
+      // Add touch swipe support for mobile
+      let startX: number | null = null;
+      let scrollLeft: number = 0;
+      
+      container.addEventListener('touchstart', (e: Event) => {
+        const touchEvent = e as TouchEvent;
+        startX = touchEvent.touches[0].pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+      }, { passive: true });
+      
+      container.addEventListener('touchmove', (e: Event) => {
+        if (startX === null) return;
+        
+        const touchEvent = e as TouchEvent;
+        const x = touchEvent.touches[0].pageX - container.offsetLeft;
+        const distance = (x - startX);
+        container.scrollLeft = scrollLeft - distance;
+      }, { passive: true });
+      
+      container.addEventListener('touchend', () => {
+        startX = null;
+      }, { passive: true });
+    }
   }
 }

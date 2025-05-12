@@ -49,10 +49,10 @@
 
   <!-- Simple Pill-like Navigation -->
   <div class="tab-navigation">
-    <button onclick="scrollToSection('home')">Home</button>
-    <button onclick="scrollToSection('experience')">Experience</button>
-    <button onclick="scrollToSection('projects')">Projects</button>
-    <button onclick="scrollToSection('contact')">Contact</button>
+    <button onclick="scrollToSection('home')" data-tab="home">Home</button>
+    <button onclick="scrollToSection('experience')" data-tab="experience">Experience</button>
+    <button onclick="scrollToSection('projects')" data-tab="projects">Projects</button>
+    <button onclick="scrollToSection('contact')" data-tab="contact" class="contact-tab">Contact</button>
   </div>
 
   <!-- Home Section -->
@@ -76,10 +76,11 @@
           <p class="fade-in-text">Building AI &amp; ML platforms daily</p>
         </section>
         
+        <!-- Links section with only icons -->
         <section class="links">
           <div class="pill-group">
             <a
-              class="pill"
+              class="social-icon"
               href="https://github.com/AyanJhunjhunwala"
               target="_blank"
               rel="noopener"
@@ -87,11 +88,11 @@
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
                 alt="GitHub Logo"
+                class="white-filter"
               />
-              GitHub
             </a>
             <a
-              class="pill"
+              class="social-icon"
               href="https://www.linkedin.com/in/ayanjhunjhunwala/"
               target="_blank"
               rel="noopener"
@@ -100,7 +101,6 @@
                 src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
                 alt="LinkedIn Logo"
               />
-              LinkedIn
             </a>
           </div>
         </section>
@@ -124,11 +124,13 @@
                 <span class="date">Present</span>
               </div>
               <div class="timeline-body">
-                <p>Currently conducting machine learning research at UC Irvine, focusing on advanced neural network architectures and their applications.</p>
+                <p>Working on LLM Quantization currently - Visualizations and Perplexity Analysis.<br> Incoming researcher with Dr. William Karnes this summer working on gasterointestinal medical imaging and cancer genetics database automation with NLP</p>
                 <div class="skills-container">
                   <span class="skill-tag">PyTorch</span>
                   <span class="skill-tag">Deep Learning</span>
                   <span class="skill-tag">Research</span>
+                  <span class="skill-tag">NLP</span>
+                  <span class="skill-tag">CV</span>
                 </div>
               </div>
             </div>
@@ -185,179 +187,132 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects">
+  <section id="projects" class="projects-section">
     <main class="main">
       <div class="content">
         <h1 class="section-title">Projects</h1>
+        <div class="section-header">
+        </div>
+        
         <div class="projects-container">
           <!-- Left Arrow -->
-          <div class="scroll-arrow left" (click)="scrollProjects('left')"></div>
+          <div class="scroll-arrow left" id="scrollLeft"></div>
           
           <!-- Project Cards -->
-          <section class="projects-grid" #projectsContainer 
-                  (mouseenter)="isHovering = true" 
-                  (mouseleave)="isHovering = false">
+          <section class="projects-grid" id="projectsGrid" #projectsContainer>
             
+            <!-- ChordWizard -->
             <div class="project-card">
               <img src="/guitar.jpeg" alt="ChordWizard"/>
               <h3>ChordWizard</h3>
               <p>
-                ChordWizard is a real-time chord recognition system using OpenCV for sound and MEL spectrogram analysis. The system detects and displays the guitar chord. The project is trained on a custom dataset from Kaggle and it is also optimized to recommend chord progressions and allows you to choose your own.
+                ChordWizard is a real-time chord recognition system using OpenCV and spectral analysis. Processes audio input through Librosa for MEL spectrogram generation, then uses CNNs to detect and identify guitar chords. Users can create their own progressions and there is also a built in finger position visualizer.
               </p>
-              <div class="skills-container">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">OpenCV</span>
-                <span class="skill-tag">ML</span>
-                <span class="skill-tag">Audio Processing</span>
+              <div class="project-tags">
+                <span class="tag">PyTorch</span>
+                <span class="tag">Librosa</span>
+                <span class="tag">Spectrograms</span>
+                <span class="tag">OpenCV</span>
               </div>
-              <!-- Icon Links Container -->
-              <div class="icon-links">
-                <!-- GitHub Icon -->
-                <a
-                  class="icon-link"
-                  href="https://github.com/AyanJhunjhunwala/ChordWizard"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                    alt="GitHub Logo"
-                  />
+              <div class="project-links">
+                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/ChordWizard" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
                 </a>
-                <!-- YouTube Icon -->
-                <a
-                  class="icon-link"
-                  href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-                    alt="YouTube"
-                  />
+                <a class="project-link demo" href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
                 </a>
               </div>
             </div>
             
+            <!-- Reddit Reviewer -->
             <div class="project-card">
               <img src="/reddit.webp" alt="Reddit Reviewer"/>
               <h3>Reddit Reviewer</h3>
               <p>
-                This project leverages Beautiful Soup to scrape Reddit threads for real-life user experiences about specific products. The collected data is then processed using an optimized Hugging Face NLP model, allowing for accurate sentiment and topic analysis. Finally, the results are visualized to help users quickly gauge community opinions and make informed decisions.
+                This project leverages BeautifulSoup for targeted web scraping of Reddit threads, collecting real user experiences about specific products. Data is processed through a fine-tuned BERT model and has interactive visualizations highlight sentiment trends and topic clusters. Helps combat the unfortunate paid Reddit API
               </p>
-              <div class="skills-container">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">NLP</span>
-                <span class="skill-tag">BeautifulSoup</span>
-                <span class="skill-tag">Hugging Face</span>
+              <div class="project-tags">
+                <span class="tag">BERT</span>
+                <span class="tag">NLP</span>
+                <span class="tag">BeautifulSoup</span>
+                <span class="tag">NER</span>
               </div>
-              <div class="icon-links">
-                <a
-                    class="icon-link"
-                    href="https://github.com/AyanJhunjhunwala/RedditReviewer"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                      alt="GitHub Logo"
-                    />
-                  </a>
+              <div class="project-links">
+                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/RedditReviewer" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                </a>
               </div>
             </div>
+            
+            <!-- BiteBuddies -->
             <div class="project-card">
               <img src="/bitebuddies.jpg" alt="BiteBuddies" />
               <h3>BiteBuddies</h3>
               <p>
-                BiteBuddies connects people through food to ease transitions and reduce waste.
-                Users build virtual pantries with OCR-enabled receipt scanning and get recipe
-                suggestions. The iOS app in Swift communicates with a Flask API via RESTful
-                endpoints. The Flask API integrates Spoonacular for food classification and
-                manages user data.
+                BiteBuddies is a full-stack food sharing platform with OCR-enabled receipt scanning using Core ML and Vision frameworks. The Swift-based iOS app implements Core Data and communicates through a RESTful API to a Flask backend. Features include personalized recipe recommendations and a community-based food sharing system to reduce waste.
               </p>
-              <div class="skills-container">
-                <span class="skill-tag">Swift</span>
-                <span class="skill-tag">Flask</span>
-                <span class="skill-tag">OCR</span>
-                <span class="skill-tag">API</span>
+              <div class="project-tags">
+                <span class="tag">Swift</span>
+                <span class="tag">Core ML</span>
+                <span class="tag">Flask</span>
+                <span class="tag">OCR</span>
               </div>
-              <!-- Icon Links Container -->
-              <div class="icon-links">
-                <!-- GitHub Icon -->
-                <a
-                  class="icon-link"
-                  href="https://github.com/AyanJhunjhunwala/BiteBuddie"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                    alt="GitHub Logo"
-                  />
+              <div class="project-links">
+                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/BiteBuddie" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
                 </a>
-                <!-- YouTube Icon -->
-                <a
-                  class="icon-link"
-                  href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-                    alt="YouTube"
-                  />
+                <a class="project-link demo" href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
                 </a>
               </div>
             </div>
+            
+            <!-- Monte Carlo Options Pricing -->
             <div class="project-card">
               <img src="/monte.jpg" alt="Monte Carlo Options Pricing"/>
               <h3>Monte Carlo Options Pricing</h3>
               <p>
-                Developed a Monte Carlo simulation in Python to price financial derivatives and assess risk metrics. Generated stochastic price
-                paths for trending tickers, visualized price distributions, and calculated VaR & CVaR to quantify downside risks. Achieved pricing
-                within 2% of expected outcomes.
+                Stochastic modeling system leveraging parallel processing with NumPy vectorization for Monte Carlo simulations of financial derivatives. Can track multiple tickers and has interactive Plotly visualizations for analyzing price distribution patterns.
               </p>
-              <div class="skills-container">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Finance</span>
-                <span class="skill-tag">Statistics</span>
-                <span class="skill-tag">Data Visualization</span>
+              <div class="project-tags">
+                <span class="tag">Stochastic</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">Plotly</span>
+                <span class="tag">Vectorization</span>
               </div>
-              <div class="icon-links">
-                <a
-                    class="icon-link"
-                    href="https://github.com/AyanJhunjhunwala/optionspricing"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                      alt="GitHub Logo"
-                    />
-                  </a>
+              <div class="project-links">
+                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/optionspricing" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                </a>
               </div>
             </div>
+            
+            <!-- TrackVest -->
             <div class="project-card trackvest-card">
               <img src="/trackv.png" alt="TrackVest"/>
               <h3>TrackVest</h3>
               <p>
-                Portfolio dashboard for tracking all types of investments (stocks, crypto, real estate, etc.). Focusing on news based sentiment analysis and also with a special section on ESG for the average retail investor.
+                Aternative investment(Real Estate, Crypto, Art, etc.) dashboard with ETL pipelines for multi-asset tracking. Implements serverless AWS Lambda functions for real-time data processing with DynamoDB. Uses GROQ to automate investment tracking and to create custom alterbative investments with a simple prompt
               </p>
-              <div class="skills-container">
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Finance</span>
-                <span class="skill-tag">API</span>
-                <span class="skill-tag">Sentiment Analysis</span>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">AWS Lambda</span>
+                <span class="tag">ETL Pipeline</span>
+                <span class="tag">DynamoDB</span>
+                <span class="tag">ESG Analysis</span>
               </div>
               <div class="contributor-badge-container">
                 <div class="contributor-badge">Looking for Contributors</div>
               </div>
             </div>
+            
           </section>
           
           <!-- Right Arrow -->
-          <div class="scroll-arrow right" (click)="scrollProjects('right')"></div>
+          <div class="scroll-arrow right" id="scrollRight"></div>
         </div>
+        
+        <!-- Remove auto-scroll controls -->
       </div>
     </main>
   </section>
@@ -371,36 +326,27 @@
           <h2>Got a project idea or just want to chat?</h2>
           <p>
             I'd love to hear from you. Whether you're brainstorming something new, 
-            looking to collaborate, or just want to say hello—feel free to reach out!
+            looking to collaborate, or just want to say hello. feel free to reach out!
           </p>
         </div>
         <!-- Email Link -->
         <a class="pill email-link" href="mailto:ajhunjh1@uci.edu">
           Get in Touch
         </a>
-        <div class="pacman-container">
-          <div class="pacman"></div>
-          <div class="path">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-        </div>
       </div>
     </main>
   </section>
 
   <!-- Back to Top Button -->
-  <button id="back-to-top" class="back-to-top" onclick="scrollToSection('home')">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 19V5M5 12l7-7 7 7"/>
+  <button id="back-to-top" aria-label="Back to top" onclick="scrollToSection('home')">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path>
     </svg>
   </button>
 
-  <!-- Smooth Scroll JavaScript -->
+  <!-- Basic Section Navigation Script -->
   <script>
-    window.scrollToSection = function(sectionId) {
+    function scrollToSection(sectionId) {
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
