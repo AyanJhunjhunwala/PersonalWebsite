@@ -20,32 +20,17 @@
   <!-- Gradient Background Container -->
   <div id="splash"></div>
   <div class="gradient-bg">
-    <svg>
-      <defs>
-        <filter id="goo">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-          <feColorMatrix
-            in="blur"
-            mode="matrix"
-            values="1 0 0 0 0  
-                    0 1 0 0 0  
-                    0 0 1 0 0  
-                    0 0 0 18 -7"
-            result="goo"
-          />
-          <feBlend in="SourceGraphic" in2="goo" />
-        </filter>
-      </defs>
-    </svg>
-    <div class="gradients-container">
       <div class="g1"></div>
       <div class="g2"></div>
       <div class="g3"></div>
-      <div class="g4"></div>
-      <div class="g5"></div>
       <div class="interactive"></div>
-    </div>
   </div>
+
+  <!-- Nav indicator line (visible when tabs are hidden) -->
+  <div class="nav-indicator"></div>
+
+  <!-- Hover area to show navigation -->
+  <div class="nav-hover-area"></div>
 
   <!-- Simple Pill-like Navigation -->
   <div class="tab-navigation">
@@ -57,7 +42,7 @@
 
   <!-- Home Section -->
   <section id="home">
-    <main class="main">
+    <main class="main parallax">
       <div class="content">
         <section class="intro">
           <img src="/prof1.png" alt="Ayan's profile picture" class="profile-pic" />
@@ -67,13 +52,11 @@
             <span #typingTarget class="typing-text"></span><span #mainCursor class="cursor"></span>
           </div>
           
-          <!-- Typing container for subtitle -->
-          <div class="subtitle-container">
-            <span #subText class="typing-text"></span><span #subCursor class="cursor"></span>
-          </div>
+          <!-- Add back CS @ UCI as static text -->
+          <div class="subtitle-text">CS &#64; UCI</div>
           
-          <!-- Static text that fades in after typing -->
-          <p class="fade-in-text">Building AI &amp; ML platforms daily</p>
+          <!-- Update fade-in text class to match main heading font -->
+          <p class="fade-in-text main-font">Building AI &amp; ML platforms daily</p>
         </section>
         
         <!-- Links section with only icons -->
@@ -110,9 +93,9 @@
 
   <!-- Experience Section -->
   <section id="experience" class="experience-section">
-    <main class="main">
+    <main class="main parallax">
       <div class="content">
-        <h1 class="section-title">Experience</h1>
+        <h1 class="section-title parallax-deep">Experience</h1>
         <div class="timeline">
           <!-- Experience Item 1 -->
           <div class="timeline-item">
@@ -188,7 +171,7 @@
 
   <!-- Projects Section -->
   <section id="projects" class="projects-section">
-    <main class="main">
+    <main class="main parallax">
       <div class="content">
         <h1 class="section-title">Projects</h1>
         <div class="section-header">
@@ -201,93 +184,7 @@
           <!-- Project Cards -->
           <section class="projects-grid" id="projectsGrid" #projectsContainer>
             
-            <!-- ChordWizard -->
-            <div class="project-card">
-              <img src="/guitar.jpeg" alt="ChordWizard"/>
-              <h3>ChordWizard</h3>
-              <p>
-                ChordWizard is a real-time chord recognition system using OpenCV and spectral analysis. Processes audio input through Librosa for MEL spectrogram generation, then uses CNNs to detect and identify guitar chords. Users can create their own progressions and there is also a built in finger position visualizer.
-              </p>
-              <div class="project-tags">
-                <span class="tag">PyTorch</span>
-                <span class="tag">Librosa</span>
-                <span class="tag">Spectrograms</span>
-                <span class="tag">OpenCV</span>
-              </div>
-              <div class="project-links">
-                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/ChordWizard" target="_blank" rel="noopener">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
-                </a>
-                <a class="project-link demo" href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala" target="_blank" rel="noopener">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
-                </a>
-              </div>
-            </div>
-            
-            <!-- Reddit Reviewer -->
-            <div class="project-card">
-              <img src="/reddit.webp" alt="Reddit Reviewer"/>
-              <h3>Reddit Reviewer</h3>
-              <p>
-                This project leverages BeautifulSoup for targeted web scraping of Reddit threads, collecting real user experiences about specific products. Data is processed through a fine-tuned BERT model and has interactive visualizations highlight sentiment trends and topic clusters. Helps combat the unfortunate paid Reddit API
-              </p>
-              <div class="project-tags">
-                <span class="tag">BERT</span>
-                <span class="tag">NLP</span>
-                <span class="tag">BeautifulSoup</span>
-                <span class="tag">NER</span>
-              </div>
-              <div class="project-links">
-                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/RedditReviewer" target="_blank" rel="noopener">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
-                </a>
-              </div>
-            </div>
-            
-            <!-- BiteBuddies -->
-            <div class="project-card">
-              <img src="/bitebuddies.jpg" alt="BiteBuddies" />
-              <h3>BiteBuddies</h3>
-              <p>
-                BiteBuddies is a full-stack food sharing platform with OCR-enabled receipt scanning using Core ML and Vision frameworks. The Swift-based iOS app implements Core Data and communicates through a RESTful API to a Flask backend. Features include personalized recipe recommendations and a community-based food sharing system to reduce waste.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Swift</span>
-                <span class="tag">Core ML</span>
-                <span class="tag">Flask</span>
-                <span class="tag">OCR</span>
-              </div>
-              <div class="project-links">
-                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/BiteBuddie" target="_blank" rel="noopener">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
-                </a>
-                <a class="project-link demo" href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner" target="_blank" rel="noopener">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
-                </a>
-              </div>
-            </div>
-            
-            <!-- Monte Carlo Options Pricing -->
-            <div class="project-card">
-              <img src="/monte.jpg" alt="Monte Carlo Options Pricing"/>
-              <h3>Monte Carlo Options Pricing</h3>
-              <p>
-                Stochastic modeling system leveraging parallel processing with NumPy vectorization for Monte Carlo simulations of financial derivatives. Can track multiple tickers and has interactive Plotly visualizations for analyzing price distribution patterns.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Stochastic</span>
-                <span class="tag">NumPy</span>
-                <span class="tag">Plotly</span>
-                <span class="tag">Vectorization</span>
-              </div>
-              <div class="project-links">
-                <a class="project-link github" href="https://github.com/AyanJhunjhunwala/optionspricing" target="_blank" rel="noopener">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
-                </a>
-              </div>
-            </div>
-            
-            <!-- TrackVest -->
+            <!-- TrackVest - Now First -->
             <div class="project-card trackvest-card">
               <img src="/trackv.png" alt="TrackVest"/>
               <h3>TrackVest</h3>
@@ -306,36 +203,152 @@
               </div>
             </div>
             
+            <!-- ChordWizard - Now Second -->
+            <div class="project-card">
+              <img src="/guitar.jpeg" alt="ChordWizard"/>
+              <h3>ChordWizard</h3>
+              <p>
+                ChordWizard is a real-time chord recognition system using OpenCV and spectral analysis. Processes audio input through Librosa for MEL spectrogram generation, then uses CNNs to detect and identify guitar chords. Users can create their own progressions and there is also a built in finger position visualizer.
+              </p>
+              <div class="project-tags">
+                <span class="tag">PyTorch</span>
+                <span class="tag">Librosa</span>
+                <span class="tag">Spectrograms</span>
+                <span class="tag">OpenCV</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link github-link" href="https://github.com/AyanJhunjhunwala/ChordWizard" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
+                </a>
+                <a class="project-link demo-link" href="https://chordwizard-demo.web.app" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="Demo"/>
+                  <span class="link-label">Demo</span>
+                </a>
+              </div>
+            </div>
+            
+            <!-- Reddit Reviewer -->
+            <div class="project-card">
+              <img src="/reddit.webp" alt="Reddit Reviewer"/>
+              <h3>Reddit Reviewer</h3>
+              <p>
+                This project leverages BeautifulSoup for targeted web scraping of Reddit threads, collecting real user experiences about specific products. Data is processed through a fine-tuned BERT model and has interactive visualizations highlight sentiment trends and topic clusters. Helps combat the unfortunate paid Reddit API
+              </p>
+              <div class="project-tags">
+                <span class="tag">BERT</span>
+                <span class="tag">NLP</span>
+                <span class="tag">BeautifulSoup</span>
+                <span class="tag">NER</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link github-link" href="https://github.com/AyanJhunjhunwala/RedditReviewer" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
+                </a>
+              </div>
+            </div>
+            
+            <!-- BiteBuddies - with both GitHub and YouTube buttons -->
+            <div class="project-card">
+              <img src="/bitebuddies.jpg" alt="BiteBuddies" />
+              <h3>BiteBuddies</h3>
+              <p>
+                BiteBuddies is a full-stack food sharing platform with OCR-enabled receipt scanning using Core ML and Vision frameworks. The Swift-based iOS app implements Core Data and communicates through a RESTful API to a Flask backend. Features include personalized recipe recommendations and a community-based food sharing system to reduce waste.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Swift</span>
+                <span class="tag">Core ML</span>
+                <span class="tag">Flask</span>
+                <span class="tag">OCR</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link github-link" href="https://github.com/AyanJhunjhunwala/BiteBuddie" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
+                </a>
+                <a class="project-link demo-link" href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
+                  <span class="link-label">Demo</span>
+                </a>
+              </div>
+            </div>
+            
+            <!-- Monte Carlo Options Pricing -->
+            <div class="project-card">
+              <img src="/monte.jpg" alt="Monte Carlo Options Pricing"/>
+              <h3>Monte Carlo Options Pricing</h3>
+              <p>
+                Stochastic modeling system leveraging parallel processing with NumPy vectorization for Monte Carlo simulations of financial derivatives. Can track multiple tickers and has interactive Plotly visualizations for analyzing price distribution patterns.
+              </p>
+              <div class="project-tags">
+
+                <span class="tag">NumPy</span>
+                <span class="tag">Plotly</span>
+                <span class="tag">Vectorization</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link github-link" href="https://github.com/AyanJhunjhunwala/optionspricing" target="_blank" rel="noopener">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
+                </a>
+              </div>
+            </div>
+            
           </section>
           
           <!-- Right Arrow -->
           <div class="scroll-arrow right" id="scrollRight"></div>
         </div>
-        
-        <!-- Remove auto-scroll controls -->
       </div>
     </main>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact-page">
-    <main class="main">
+    <main class="main parallax">
       <div class="content">
-        <!-- Banner -->
+        <!-- Updated Contact Banner with original text -->
         <div class="contact-banner">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
           <h2>Got a project idea or just want to chat?</h2>
           <p>
             I'd love to hear from you. Whether you're brainstorming something new, 
             looking to collaborate, or just want to say hello. feel free to reach out!
           </p>
+          <!-- Email Link without icon -->
+          <a class="email-link" href="mailto:ajhunjh1@uci.edu">
+            <span>Get in Touch</span>
+          </a>
         </div>
-        <!-- Email Link -->
-        <a class="pill email-link" href="mailto:ajhunjh1@uci.edu">
-          Get in Touch
-        </a>
       </div>
     </main>
   </section>
+
+  <!-- Footer Section with Credits -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://github.com/AyanJhunjhunwala" target="_blank" rel="noopener" class="footer-link">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo" class="white-filter footer-icon">
+        </a>
+        <a href="https://www.linkedin.com/in/ayanjhunjhunwala/" target="_blank" rel="noopener" class="footer-link">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn Logo" class="footer-icon">
+        </a>
+        <a href="mailto:ajhunjh1@uci.edu" class="footer-link">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email" class="footer-icon">
+        </a>
+      </div>
+      <div class="footer-credits">
+        <p>© 2025 Ayan Jhunjhunwala. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top" onclick="scrollToSection('home')">

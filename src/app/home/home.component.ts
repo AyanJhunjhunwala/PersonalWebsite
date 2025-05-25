@@ -18,26 +18,63 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   
   textToType = "Hi I'm Ayan!";
   subTextToType = "CS @ UCI";
+  greetings = ["Hi", "Hola", "Bonjour", "Ciao", "Namaste", "こんにちは", "안녕하세요", "你好", "Hallo", "Olá"];
+  currentGreetingIndex = 0;
   cursorPosition = { x: 50, y: 50 }; // Default cursor position
+  targetPosition = { x: 50, y: 50 }; // Target position for smooth transition
   
-  // Removed autoScroll related properties
   private scrollContainer!: HTMLElement;
+  private autoScrollSpeed = 0.4; // Reduced from 0.7 for smoother scrolling
+  private autoScrollActive = true;
+  private autoScrollRafId: number | null = null;
+  private isProjectsHovered = false;
+  
+  private isThrottled = false;
+  private animationFrameId: number | null = null;
+  private cursorUpdating = false;
+  
+  private lastScrollY = 0;
+  private parallaxRafId: number | null = null;
   
   constructor(private renderer: Renderer2) {}
   
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    // Calculate cursor position as percentage of window
-    this.cursorPosition = {
+    // Calculate target cursor position as percentage of window
+    this.targetPosition = {
       x: (event.clientX / window.innerWidth) * 100,
       y: (event.clientY / window.innerHeight) * 100
     };
+    
+    // Start the smooth animation if not already running
+    if (!this.cursorUpdating) {
+      this.cursorUpdating = true;
+      this.updateCursorPosition();
+    }
+  }
+
+  updateCursorPosition() {
+    // Smoothly interpolate current position towards target position
+    this.cursorPosition.x += (this.targetPosition.x - this.cursorPosition.x) * 0.1;
+    this.cursorPosition.y += (this.targetPosition.y - this.cursorPosition.y) * 0.1;
     
     // Update interactive gradient position
     const interactive = document.querySelector('.interactive') as HTMLElement;
     if (interactive) {
       interactive.style.setProperty('--cursor-x', `${this.cursorPosition.x}%`);
       interactive.style.setProperty('--cursor-y', `${this.cursorPosition.y}%`);
+    }
+    
+    // Continue animation loop
+    this.animationFrameId = requestAnimationFrame(() => this.updateCursorPosition());
+    
+    // Stop animation if cursor is very close to target (optimization)
+    const dx = Math.abs(this.targetPosition.x - this.cursorPosition.x);
+    const dy = Math.abs(this.targetPosition.y - this.cursorPosition.y);
+    
+    if (dx < 0.01 && dy < 0.01 && this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.cursorUpdating = false;
     }
   }
 
@@ -51,7 +88,23 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         backToTopButton.classList.remove('visible');
       }
     }
+    
+    // Tab navigation hide/show
+    const tabNavigation = document.querySelector('.tab-navigation') as HTMLElement;
+    const navIndicator = document.querySelector('.nav-indicator') as HTMLElement;
+    
+    if (tabNavigation && navIndicator) {
+      if (window.scrollY > 100) {
+        tabNavigation.classList.add('hidden');
+        navIndicator.classList.add('visible');
+      } else {
+        tabNavigation.classList.remove('hidden');
+        navIndicator.classList.remove('visible');
+      }
+    }
+    
     this.animateOnScroll();
+    this.scheduleParallaxUpdate();
   }
   
   @HostListener('window:load', [])
@@ -63,31 +116,30 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.hideLoadingScreen();
       
-      this.typeText(this.typingTarget.nativeElement, this.textToType, 0, () => {
-        this.renderer.setStyle(this.mainCursor.nativeElement, 'display', 'none');
-        
-        setTimeout(() => {
-          this.typeText(this.subText.nativeElement, this.subTextToType, 0, () => {
-            this.renderer.setStyle(this.subCursor.nativeElement, 'display', 'none');
-            
-            const buildingText = document.querySelector('.fade-in-text') as HTMLElement;
-            if (buildingText) {
-              buildingText.style.opacity = '1';
-              buildingText.style.transition = 'opacity 0.8s ease';
-            }
-          });
-        }, 300);
-      });
+      this.typeGreeting();
       
       this.initSmoothScrolling();
       this.onWindowScroll();
       this.setupProjectCards();
       this.initProjectScrolling();
+      this.initTabNavHover();
+      
+      // Start cursor animation
+      this.updateCursorPosition();
     }, 1500);
   }
   
   ngOnDestroy() {
-    // Cleanup resources if needed
+    // Clean up animation frame on component destroy
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.autoScrollRafId !== null) {
+      cancelAnimationFrame(this.autoScrollRafId);
+    }
+    if (this.parallaxRafId !== null) {
+      cancelAnimationFrame(this.parallaxRafId);
+    }
   }
   
   hideLoadingScreen() {
@@ -118,6 +170,68 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     });
   }
   
+  typeGreeting() {
+    // Reset the text content
+    if (this.typingTarget) {
+      const currentText = this.typingTarget.nativeElement.textContent || "";
+      const greeting = this.greetings[this.currentGreetingIndex];
+      const staticText = " I'm Ayan!";
+      
+      // If there's existing text, delete it first
+      if (currentText.length > 0) {
+        this.deleteText(this.typingTarget.nativeElement, currentText, () => {
+          // After deletion, type the new greeting
+          this.typeText(this.typingTarget.nativeElement, greeting + staticText, 0, () => {
+            // After typing is complete
+            this.renderer.setStyle(this.mainCursor.nativeElement, 'display', 'none');
+            
+            // Show the "Building AI & ML platforms daily" text
+            const buildingText = document.querySelector('.fade-in-text') as HTMLElement;
+            if (buildingText) {
+              buildingText.style.opacity = '1';
+              buildingText.style.transition = 'opacity 0.8s ease';
+            }
+            
+            // Cycle to next greeting after a shorter delay (7 seconds instead of 10)
+            setTimeout(() => {
+              this.currentGreetingIndex = (this.currentGreetingIndex + 1) % this.greetings.length;
+              this.renderer.setStyle(this.mainCursor.nativeElement, 'display', 'inline-block');
+              this.typeGreeting();
+            }, 7000);
+          });
+        });
+      } else {
+        // Initial typing (no text to delete)
+        this.typeText(this.typingTarget.nativeElement, greeting + staticText, 0, () => {
+          this.renderer.setStyle(this.mainCursor.nativeElement, 'display', 'none');
+          
+          // Show the "Building AI & ML platforms daily" text
+          const buildingText = document.querySelector('.fade-in-text') as HTMLElement;
+          if (buildingText) {
+            buildingText.style.opacity = '1';
+            buildingText.style.transition = 'opacity 0.8s ease';
+          }
+          
+          // Cycle to next greeting after a shorter delay
+          setTimeout(() => {
+            this.currentGreetingIndex = (this.currentGreetingIndex + 1) % this.greetings.length;
+            this.renderer.setStyle(this.mainCursor.nativeElement, 'display', 'inline-block');
+            this.typeGreeting();
+          }, 7000);
+        });
+      }
+    }
+  }
+  
+  deleteText(element: HTMLElement, text: string, callback: () => void) {
+    if (text.length > 0) {
+      element.textContent = text.substring(0, text.length - 1);
+      setTimeout(() => this.deleteText(element, element.textContent || "", callback), 50);
+    } else {
+      callback();
+    }
+  }
+  
   typeText(element: HTMLElement, text: string, index: number, callback: () => void) {
     if (index < text.length) {
       element.textContent += text.charAt(index);
@@ -142,7 +256,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   scrollToSection(sectionId: string) {
     const section = document.getElementById(sectionId);
     if (section) section.scrollIntoView({ behavior: 'smooth' });
-  }
+    }
 
   initProjectScrolling() {
     const container = document.querySelector('.projects-grid') as HTMLElement;
@@ -151,86 +265,151 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       return;
     }
     this.scrollContainer = container;
+
+    // Remove the clone cards section
+    // We're not cloning cards anymore for auto-scrolling
+
+    // --- Mouse events for pause/resume ---
+    container.addEventListener('mouseenter', () => {
+      this.isProjectsHovered = true;
+      // No need to stop auto-scroll since it's removed
+    });
+    container.addEventListener('mouseleave', () => {
+      this.isProjectsHovered = false;
+      // No need to start auto-scroll since it's removed
+    });
     
+    // --- Arrow navigation ---
     const leftArrow = document.querySelector('.scroll-arrow.left') as HTMLElement;
     const rightArrow = document.querySelector('.scroll-arrow.right') as HTMLElement;
     
-    if (leftArrow && rightArrow) {
-      // Calculate the scroll distance (one card width + gap)
-      const calculateScrollDistance = () => {
-        const projectCard = document.querySelector('.project-card') as HTMLElement;
-        const cardWidth = projectCard ? projectCard.offsetWidth : 450;
-        const gap = 30; // gap between cards as defined in CSS
-        return cardWidth + gap;
-      };
+    if (leftArrow) {
+      leftArrow.addEventListener('click', () => this.scrollProjectsTo('left'));
+    }
+    
+    if (rightArrow) {
+      rightArrow.addEventListener('click', () => this.scrollProjectsTo('right'));
+    }
+
+    // Remove auto-scroll start
+  }
+
+  // Add a method to handle manual navigation with the arrows
+  scrollProjectsTo(direction: 'left' | 'right') {
+    if (!this.scrollContainer) return;
+    
+    // No need to stop autoscrolling since it's removed
+    
+    // Calculate the scroll distance (one card width + gap)
+    const projectCard = this.scrollContainer.querySelector('.project-card') as HTMLElement;
+    const cardWidth = projectCard ? projectCard.offsetWidth : 450;
+    const gap = 25; // gap from CSS
+    const scrollDistance = cardWidth + gap;
+    
+    // Perform the scroll
+    this.scrollContainer.scrollBy({
+      left: direction === 'left' ? -scrollDistance : scrollDistance,
+      behavior: 'smooth'
+    });
+    
+    // No need to resume autoscroll
+  }
+
+  scheduleParallaxUpdate() {
+    if (this.parallaxRafId !== null) return;
+    this.parallaxRafId = requestAnimationFrame(() => this.updateParallax());
+  }
+
+  updateParallax() {
+    const scrollY = window.scrollY;
+    if (scrollY !== this.lastScrollY) {
+      document.body.setAttribute('data-parallax-scroll', '');
+      document.body.style.setProperty('--parallax-bg', `${scrollY * 0.4}px`);
+      document.body.style.setProperty('--parallax-content', `${scrollY * 0.15}px`);
       
-      // Scroll left when clicking the left arrow
-      leftArrow.addEventListener('click', () => {
-        const scrollDistance = calculateScrollDistance();
-        container.scrollBy({ 
-          left: -scrollDistance, 
-          behavior: 'smooth' 
-        });
+      // Enhanced parallax effect for deep elements
+      const deepElements = document.querySelectorAll('.parallax-deep');
+      deepElements.forEach(element => {
+        const rect = (element as HTMLElement).getBoundingClientRect();
+        const centerY = rect.top + rect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+        const distanceFromCenter = (centerY - viewportCenter) * 0.05;
+        (element as HTMLElement).style.transform = `translateY(${-distanceFromCenter}px) scale(${1 + Math.abs(distanceFromCenter) * 0.0005})`;
+      });
+    }
+    this.lastScrollY = scrollY;
+    this.parallaxRafId = null;
+  }
+
+  // Method to handle hover behavior for tab navigation
+  initTabNavHover() {
+    setTimeout(() => {
+      const hoverArea = document.querySelector('.nav-hover-area') as HTMLElement;
+      const tabNavigation = document.querySelector('.tab-navigation') as HTMLElement;
+      const navIndicator = document.querySelector('.nav-indicator') as HTMLElement;
+      
+      if (!hoverArea || !tabNavigation || !navIndicator) {
+        console.error('Navigation elements not found');
+        return;
+      }
+      
+      // Initial state based on scroll
+      this.updateNavigationVisibility(tabNavigation, navIndicator);
+      
+      // Show navigation on hover area mouseenter
+      hoverArea.addEventListener('mouseenter', () => {
+        console.log('Mouse entered hover area');
+        tabNavigation.style.opacity = '1';
+        tabNavigation.style.transform = 'translateX(-50%)';
+        tabNavigation.style.pointerEvents = 'auto';
+        navIndicator.style.opacity = '0';
       });
       
-      // Scroll right when clicking the right arrow
-      rightArrow.addEventListener('click', () => {
-        const scrollDistance = calculateScrollDistance();
-        container.scrollBy({ 
-          left: scrollDistance, 
-          behavior: 'smooth' 
-        });
+      // Direct interaction with navigation
+      tabNavigation.addEventListener('mouseenter', () => {
+        console.log('Mouse entered navigation');
+        tabNavigation.style.opacity = '1';
+        tabNavigation.style.transform = 'translateX(-50%)';
+        tabNavigation.style.pointerEvents = 'auto';
+        navIndicator.style.opacity = '0';
       });
       
-      // Show/hide arrows based on scroll position
-      const toggleArrowVisibility = () => {
-        const isAtStart = container.scrollLeft <= 10;
-        const isAtEnd = container.scrollLeft >= (container.scrollWidth - container.clientWidth - 10);
+      // Hide when leaving both areas
+      document.addEventListener('mousemove', (e) => {
+        const target = e.target as HTMLElement;
+        const isOverNavArea = tabNavigation.contains(target) || hoverArea.contains(target);
         
-        leftArrow.style.opacity = isAtStart ? '0.3' : '0.7';
-        leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
-        
-        rightArrow.style.opacity = isAtEnd ? '0.3' : '0.7';
-        rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
-      };
-      
-      // Add scroll event listener to toggle arrow visibility
-      container.addEventListener('scroll', toggleArrowVisibility);
-      
-      // Initialize arrow visibility
-      toggleArrowVisibility();
-      
-      // Handle keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          leftArrow.click();
-        } else if (e.key === 'ArrowRight') {
-          rightArrow.click();
+        if (!isOverNavArea && window.scrollY > 100) {
+          this.updateNavigationVisibility(tabNavigation, navIndicator);
         }
       });
+      
+      // Also update on scroll
+      window.addEventListener('scroll', () => {
+        // Check if not hovering over the navigation or hover area
+        if (!hoverArea.matches(':hover') && !tabNavigation.matches(':hover')) {
+          this.updateNavigationVisibility(tabNavigation, navIndicator);
+        }
+      });
+      
+      console.log('Navigation hover behavior initialized');
+    }, 2000); // Wait for DOM to fully initialize
+  }
 
-      // Add touch swipe support for mobile
-      let startX: number | null = null;
-      let scrollLeft: number = 0;
-      
-      container.addEventListener('touchstart', (e: Event) => {
-        const touchEvent = e as TouchEvent;
-        startX = touchEvent.touches[0].pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-      }, { passive: true });
-      
-      container.addEventListener('touchmove', (e: Event) => {
-        if (startX === null) return;
-        
-        const touchEvent = e as TouchEvent;
-        const x = touchEvent.touches[0].pageX - container.offsetLeft;
-        const distance = (x - startX);
-        container.scrollLeft = scrollLeft - distance;
-      }, { passive: true });
-      
-      container.addEventListener('touchend', () => {
-        startX = null;
-      }, { passive: true });
+  // Helper method to update navigation visibility based on scroll
+  updateNavigationVisibility(tabNavigation: HTMLElement, navIndicator: HTMLElement) {
+    if (window.scrollY > 100) {
+      // Hide navigation
+      tabNavigation.style.opacity = '0';
+      tabNavigation.style.transform = 'translateX(-50%) translateY(-20px)';
+      tabNavigation.style.pointerEvents = 'none';
+      navIndicator.style.opacity = '1';
+    } else {
+      // Show navigation
+      tabNavigation.style.opacity = '1';
+      tabNavigation.style.transform = 'translateX(-50%)';
+      tabNavigation.style.pointerEvents = 'auto';
+      navIndicator.style.opacity = '0';
     }
   }
 }
