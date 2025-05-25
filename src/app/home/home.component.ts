@@ -309,7 +309,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     // Perform the scroll
     this.scrollContainer.scrollBy({
       left: direction === 'left' ? -scrollDistance : scrollDistance,
-      behavior: 'smooth'
+      behavior: 'smooth' 
     });
     
     // No need to resume autoscroll
@@ -410,6 +410,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       tabNavigation.style.transform = 'translateX(-50%)';
       tabNavigation.style.pointerEvents = 'auto';
       navIndicator.style.opacity = '0';
-    }
   }
+}
 }
