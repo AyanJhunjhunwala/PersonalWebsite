@@ -35,11 +35,28 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   
   private lastScrollY = 0;
   private parallaxRafId: number | null = null;
+  private isMobile = false;
+  private touchStartX = 0;
+  private touchStartY = 0;
   
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) {
+    this.checkIfMobile();
+  }
+  
+  checkIfMobile() {
+    this.isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+  
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    this.checkIfMobile();
+  }
   
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
+    // Skip cursor effects on mobile devices
+    if (this.isMobile) return;
+    
     // Calculate target cursor position as percentage of window
     this.targetPosition = {
       x: (event.clientX / window.innerWidth) * 100,
@@ -52,8 +69,58 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       this.updateCursorPosition();
     }
   }
+  
+  @HostListener('document:touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    if (!this.isMobile) return;
+    
+    this.touchStartX = event.touches[0].clientX;
+    this.touchStartY = event.touches[0].clientY;
+  }
+  
+  @HostListener('document:touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    if (!this.isMobile) return;
+    
+    // Prevent default to avoid scrolling issues
+    const touch = event.touches[0];
+    const deltaX = Math.abs(touch.clientX - this.touchStartX);
+    const deltaY = Math.abs(touch.clientY - this.touchStartY);
+    
+    // If horizontal swipe is more significant, handle project scrolling
+    if (deltaX > deltaY && deltaX > 50) {
+      const projectsGrid = document.getElementById('projectsGrid');
+      if (projectsGrid && this.isElementInViewport(projectsGrid)) {
+        event.preventDefault();
+        
+        if (touch.clientX > this.touchStartX) {
+          this.scrollProjectsTo('left');
+        } else {
+          this.scrollProjectsTo('right');
+        }
+        
+        this.touchStartX = touch.clientX;
+      }
+    }
+  }
+  
+  private isElementInViewport(element: HTMLElement): boolean {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
 
   updateCursorPosition() {
+    // Skip cursor effects on mobile devices
+    if (this.isMobile) {
+      this.cursorUpdating = false;
+      return;
+    }
+    
     // Smoothly interpolate current position towards target position
     this.cursorPosition.x += (this.targetPosition.x - this.cursorPosition.x) * 0.1;
     this.cursorPosition.y += (this.targetPosition.y - this.cursorPosition.y) * 0.1;
