@@ -29,8 +29,8 @@
   <!-- Simple Pill-like Navigation -->
   <div class="tab-navigation">
     <button onclick="scrollToSection('home')" data-tab="home">Home</button>
-    <button onclick="scrollToSection('experience')" data-tab="experience">Experience</button>
     <button onclick="scrollToSection('projects')" data-tab="projects">Projects</button>
+    <button onclick="scrollToSection('experience')" data-tab="experience">Experience</button>
     <button onclick="scrollToSection('contact')" data-tab="contact" class="contact-tab">Contact</button>
   </div>
 
@@ -87,100 +87,6 @@
     </main>
   </section>
 
-  <!-- Experience Section -->
-  <section id="experience" class="experience-section">
-    <main class="main">
-      <div class="content">
-        <h1 class="section-title centered-title">Experience</h1>
-        <div class="experience-list">
-          
-          <!-- Experience Item 1 - LBA -->
-          <div class="experience-item">
-            <div class="experience-icon">
-              <img src="/lba.png" alt="LBA" class="company-icon"/>
-            </div>
-            <div class="experience-content">
-              <div class="experience-header">
-                <div class="job-info">
-                  <h3 class="job-title">AI Engineering Intern (Incoming)</h3>
-                  <p class="company-name">LBA</p>
-                  <p class="job-location">Irvine, CA</p>
-                </div>
-                <p class="job-date">June 2025 – Present</p>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Experience Item 2 - UCI -->
-          <div class="experience-item">
-            <div class="experience-icon">
-              <img src="/uci.svg" alt="UC Irvine" class="company-icon"/>
-            </div>
-            <div class="experience-content">
-              <div class="experience-header">
-                <div class="job-info">
-                  <h3 class="job-title">ML Researcher</h3>
-                  <p class="company-name">UC Irvine</p>
-                  <p class="job-location">Irvine, CA</p>
-                </div>
-                <p class="job-date">Present</p>
-              </div>
-              <ul class="responsibilities-list">
-                <li>Currently developing a CNN driven model to guide colonoscopy gaze tools, aiding med students in real-time navigation</li>
-                <li>Worked on LLM Quantization helped optimize perplexity analysis experiments and created self updating data visualizations.</li>
-                <li>Incoming researcher with Dr. William Karnes this summer working on gastroenterological medical imaging and cancer genetics database automation with NLP</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Experience Item 3 - IBM -->
-          <div class="experience-item">
-            <div class="experience-icon">
-              <img src="/ibm.jpg" alt="IBM" class="company-icon"/>
-            </div>
-            <div class="experience-content">
-              <div class="experience-header">
-                <div class="job-info">
-                  <h3 class="job-title">IBM Apprentice</h3>
-                  <p class="company-name">Accelerate 2024</p>
-                  <p class="job-location">Remote</p>
-                </div>
-                <p class="job-date">May 2024 - July 2024</p>
-              </div>
-              <ul class="responsibilities-list">
-                <li>Worked with the AI & Research branch at IBM, testing both open-source LLMs as well as developing my own using Python and IBM Watson. Accelerate has an acceptance rate of sub 5%</li>
-                <li>Gained expertise in developing and scaling LLMs using Tensorflow and DeepSpeed, optimizing resource allocation, learned about IBM's hybrid cloud solutions, understanding how to work to enhance flexibility, security, and efficiency in cloud computing environments</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Experience Item 4 - SJSU -->
-          <div class="experience-item">
-            <div class="experience-icon">
-              <img src="/sjsu.png" alt="SJSU" class="company-icon"/>
-            </div>
-            <div class="experience-content">
-              <div class="experience-header">
-                <div class="job-info">
-                  <h3 class="job-title">Research Assistant</h3>
-                  <p class="company-name">ICANN - San Jose State University</p>
-                  <p class="job-location">San Jose, California</p>
-                </div>
-                <p class="job-date">August 2022 - January 2023</p>
-              </div>
-              <ul class="responsibilities-list">
-                <li>Wrote an algorithm to rank top 8% of submissions in the RSNA Cervical Spine Fracture Detection Challenge</li>
-                <li>Worked on a mentored research paper that analyzed different types of neural network architectures and determined which ones were most efficient for fractures. Fine tuned ResNet to fit fracture data</li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </main>
-  </section>
-
   <!-- Projects Section -->
   <section id="projects" class="projects-section">
     <main class="main">
@@ -221,19 +127,40 @@
 
             </div>
 
-            <!-- Custom CUDA LLM Quantization Engine -->
+            <!-- ContextQ -->
             <div class="project-card">
-              <img src="/cuda.svg" alt="Custom CUDA LLM Quantization Engine"/>
-              <h3>Custom CUDA LLM Quantization Engine</h3>
+              <img src="/quant.jpg" alt="ContextQ"/>
+              <h3>ContextQ</h3>
               <p>
-                High-performance CUDA-based quantization engine for large language models. Implements custom kernels for INT8/INT4 quantization with minimal accuracy loss. Features memory-efficient attention mechanisms and optimized GEMM operations for faster inference on NVIDIA GPUs.
+                Python library that dynamically adjusts quantization precision based on context relevance and attention patterns, enabling 3-5x longer effective context windows with minimal accuracy loss. Implements adaptive bit-width allocation and intelligent token prioritization for efficient long-form text processing.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">Quantization</span>
+                <span class="tag">Attention Mechanisms</span>
+                <span class="tag">Context Optimization</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link working-on-it" href="#" onclick="return false;">
+                  <span class="link-label">Working on it...</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Custom CUDA Statistical Simulations -->
+            <div class="project-card">
+              <img src="/cuda.svg" alt="CUDA Statistical Simulations"/>
+              <h3>CUDA based Statistical Simulations</h3>
+              <p>
+                High-performance CUDA-based statistical simulation framework for Monte Carlo methods, Bayesian inference, and large-scale data analysis. Implements custom kernels for parallel random number generation, matrix operations, and statistical computations with GPU acceleration for computational finance and scientific computing applications.
               </p>
               <div class="project-tags">
                 <span class="tag">CUDA</span>
                 <span class="tag">C++</span>
-                <span class="tag">PyTorch</span>
-                <span class="tag">Quantization</span>
-                <span class="tag">GPU Optimization</span>
+                <span class="tag">Statistics</span>
+                <span class="tag">Monte Carlo</span>
+                <span class="tag">GPU Computing</span>
               </div>
               <div class="project-links">
                 <a class="project-link working-on-it" href="#" onclick="return false;">
@@ -338,6 +265,100 @@
           
           <!-- Right Arrow -->
           <div class="scroll-arrow right" id="scrollRight"></div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="experience-section">
+    <main class="main">
+      <div class="content">
+        <h1 class="section-title centered-title">Experience</h1>
+        <div class="experience-list">
+          
+          <!-- Experience Item 1 - LBA -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/lba.png" alt="LBA" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">AI Engineering Intern (Incoming)</h3>
+                  <p class="company-name">LBA</p>
+                  <p class="job-location">Irvine, CA</p>
+                </div>
+                <p class="job-date">June 2025 – Present</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Experience Item 2 - UCI -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/uci.svg" alt="UC Irvine" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">ML Researcher</h3>
+                  <p class="company-name">UC Irvine</p>
+                  <p class="job-location">Irvine, CA</p>
+                </div>
+                <p class="job-date">Present</p>
+              </div>
+              <ul class="responsibilities-list">
+                <li>Currently developing a CNN driven model to guide colonoscopy gaze tools, aiding med students in real-time navigation</li>
+                <li>Worked on LLM Quantization helped optimize perplexity analysis experiments and created self updating data visualizations.</li>
+                <li>Incoming researcher with Dr. William Karnes this summer working on gastroenterological medical imaging and cancer genetics database automation with NLP</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Experience Item 3 - IBM -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/ibm.jpg" alt="IBM" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">IBM Apprentice</h3>
+                  <p class="company-name">Accelerate 2024</p>
+                  <p class="job-location">Remote</p>
+                </div>
+                <p class="job-date">May 2024 - July 2024</p>
+              </div>
+              <ul class="responsibilities-list">
+                <li>Worked with the AI & Research branch at IBM, testing both open-source LLMs as well as developing my own using Python and IBM Watson. Accelerate has an acceptance rate of sub 5%</li>
+                <li>Gained expertise in developing and scaling LLMs using Tensorflow and DeepSpeed, optimizing resource allocation, learned about IBM's hybrid cloud solutions, understanding how to work to enhance flexibility, security, and efficiency in cloud computing environments</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Experience Item 4 - SJSU -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/sjsu.png" alt="SJSU" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">Research Assistant</h3>
+                  <p class="company-name">ICANN - San Jose State University</p>
+                  <p class="job-location">San Jose, California</p>
+                </div>
+                <p class="job-date">August 2022 - January 2023</p>
+              </div>
+              <ul class="responsibilities-list">
+                <li>Wrote an algorithm to rank top 8% of submissions in the RSNA Cervical Spine Fracture Detection Challenge</li>
+                <li>Worked on a mentored research paper that analyzed different types of neural network architectures and determined which ones were most efficient for fractures. Fine tuned ResNet to fit fracture data</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>

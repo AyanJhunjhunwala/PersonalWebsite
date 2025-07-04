@@ -38,6 +38,7 @@
 /* Smooth scrolling */
 .projects-grid {
   scroll-behavior: smooth;
+  
   -webkit-overflow-scrolling: touch; /* For better scrolling on iOS */
 }
 

@@ -695,16 +695,15 @@ main.main {
 
 /* Fixed Contact Banner */
 .contact-banner {
-  background: linear-gradient(135deg, rgba(35, 40, 55, 0.9), rgba(45, 50, 70, 0.8));
+  background: rgba(20, 25, 35, 0.95);
   backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
-              0 6px 10px 0 rgba(0,0,0,.14), 
-              0 1px 18px 0 rgba(0,0,0,.12);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  max-width: 600px;
-  margin: 0 auto 2.5rem;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.3), 
+              0 4px 8px rgba(0,0,0,.2);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  max-width: 500px;
+  margin: 0 auto 2rem;
   text-align: center;
   animation: fadeInUp 0.9s ease forwards;
   animation-delay: 0.2s;
@@ -714,17 +713,15 @@ main.main {
 }
 
 .contact-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(45deg, #8e24aa, #d81b60);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, rgba(80, 200, 120, 0.8), rgba(100, 220, 140, 0.8));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
-              0 6px 10px 0 rgba(0,0,0,.14), 
-              0 1px 18px 0 rgba(0,0,0,.12);
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px rgba(80, 200, 120, 0.3);
 }
 
 .contact-icon svg {
@@ -732,18 +729,51 @@ main.main {
 }
 
 .contact-banner h2 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-  font-weight: 300;
-  letter-spacing: 0.5px;
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: #ffffff;
 }
 
 .contact-banner p {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.5;
   max-width: 90%;
-  margin: 0 auto 2rem;
-  color: rgba(255, 255, 255, 0.9);
+  margin: 0 auto 1.5rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Email link - Minimal design */
+.email-link {
+  background-color: rgba(80, 200, 120, 0.8);
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.7rem 1.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-link .email-icon {
+  display: none;
+}
+
+.email-link:hover {
+  background-color: rgba(100, 220, 140, 0.9);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(80, 200, 120, 0.4);
+}
+
+.email-link:active {
+  transform: translateY(-1px);
 }
 
 /* Fixed Pacman Animation */
@@ -764,42 +794,6 @@ main.main {
   display: none;
 }
 
-/* Email link - Remove icon */
-.email-link {
-  background-color: rgba(80, 200, 120, 0.8);
-  color: #fff;
-  border-radius: 28px;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
-              0 6px 10px 0 rgba(0,0,0,.14), 
-              0 1px 18px 0 rgba(0,0,0,.12);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.email-link .email-icon {
-  display: none;
-}
-
-.email-link:hover {
-  background-color: rgba(100, 220, 140, 0.9);
-  transform: translateY(-4px);
-  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 
-              0 8px 10px 1px rgba(0,0,0,.14), 
-              0 3px 14px 2px rgba(0,0,0,.12);
-}
-
-.email-link:active {
-  transform: translateY(-2px);
-}
-
 /* Projects container with scrolling */
 .projects-container {
   position: relative;
@@ -815,31 +809,39 @@ main.main {
   overflow-x: auto;
   gap: 25px;
   padding: 20px 40px;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: none;
   -webkit-overflow-scrolling: touch;
   
   /* Enhanced smooth scrolling */
   scroll-padding-left: 40px;
   scroll-padding-right: 40px;
+  
+  /* Infinite scroll support */
+  will-change: scroll-position;
+  transition: none;
 }
 
 .projects-grid::-webkit-scrollbar {
   display: none; /* Chrome/Safari/Opera */
 }
 
+/* Cloned cards for infinite scroll */
+.cloned-card {
+  opacity: 1;
+}
+
 /* Project card - Material UI elevation and layout */
 .project-card {
   flex: 0 0 400px;
   max-width: 400px;
-  background-color: rgba(35, 40, 55, 0.85);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
-              0 6px 10px 0 rgba(0,0,0,.14), 
-              0 1px 18px 0 rgba(0,0,0,.12);
+  background-color: rgba(20, 25, 35, 0.95);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.3), 
+              0 4px 8px rgba(0,0,0,.2);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
               box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -850,7 +852,7 @@ main.main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.02);
   scroll-snap-align: start;
 }
 
@@ -859,10 +861,9 @@ main.main {
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 
-              0 8px 10px 1px rgba(0,0,0,.14), 
-              0 3px 14px 2px rgba(0,0,0,.12);
+  transform: translateY(-6px);
+  box-shadow: 0 4px 8px rgba(0,0,0,.4), 
+              0 8px 16px rgba(0,0,0,.3);
 }
 
 .project-card:hover::before {
@@ -871,26 +872,26 @@ main.main {
 
 .project-card img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  border-radius: 6px;
+  margin-bottom: 12px;
   transition: filter 0.2s ease;
 }
 
 .project-card h3 {
-  font-size: 1.6rem;
-  margin-bottom: 12px;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
   color: white;
   font-weight: 500;
   letter-spacing: 0.1px;
 }
 
 .project-card p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.75);
   flex-grow: 1;
   overflow: hidden;
   display: -webkit-box;
@@ -902,51 +903,52 @@ main.main {
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 10px 0 15px;
+  gap: 6px;
+  margin: 8px 0 12px;
 }
 
 .tag {
-  background-color: rgba(45, 50, 65, 0.9);
-  color: #ffffff;
-  padding: 4px 12px;
-  border-radius: 16px;
-  font-size: 0.8rem;
+  background-color: rgba(30, 35, 45, 0.8);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .tag:hover {
-  background-color: rgba(55, 60, 75, 0.95);
-  transform: translateY(-2px);
+  background-color: rgba(40, 45, 55, 0.9);
+  transform: translateY(-1px);
 }
 
 /* Project links - Material UI buttons with centered layout */
 .project-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 16px;
   margin-top: auto;
-  padding-top: 20px;
+  padding-top: 16px;
 }
 
 .project-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 20px;
-  border-radius: 24px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 10px 18px;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   color: white;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 0.85rem;
 }
 
 .project-link::before {

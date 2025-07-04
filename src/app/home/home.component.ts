@@ -27,6 +27,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private autoScrollActive = true;
   private autoScrollRafId: number | null = null;
   private isProjectsHovered = false;
+  private infiniteScrollRafId: number | null = null;
+  private scrollPosition = 0;
   
   private isThrottled = false;
   private animationFrameId: number | null = null;
@@ -206,6 +208,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (this.parallaxRafId !== null) {
       cancelAnimationFrame(this.parallaxRafId);
     }
+    if (this.infiniteScrollRafId !== null) {
+      cancelAnimationFrame(this.infiniteScrollRafId);
+    }
   }
   
   hideLoadingScreen() {
@@ -332,17 +337,31 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
     this.scrollContainer = container;
 
-    // Remove the clone cards section
-    // We're not cloning cards anymore for auto-scrolling
+    // Clone project cards for infinite scrolling
+    const projectCards = container.querySelectorAll('.project-card');
+    const originalCards = Array.from(projectCards);
+    
+    // Clear existing clones
+    container.querySelectorAll('.cloned-card').forEach(clone => clone.remove());
+    
+    // Clone cards and append to the end
+    originalCards.forEach(card => {
+      const clone = card.cloneNode(true) as HTMLElement;
+      clone.classList.add('cloned-card');
+      container.appendChild(clone);
+    });
+
+    // Set up infinite scrolling
+    this.startInfiniteScroll();
 
     // --- Mouse events for pause/resume ---
     container.addEventListener('mouseenter', () => {
       this.isProjectsHovered = true;
-      // No need to stop auto-scroll since it's removed
+      this.stopInfiniteScroll();
     });
     container.addEventListener('mouseleave', () => {
       this.isProjectsHovered = false;
-      // No need to start auto-scroll since it's removed
+      this.startInfiniteScroll();
     });
     
     // --- Arrow navigation ---
@@ -356,8 +375,38 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (rightArrow) {
       rightArrow.addEventListener('click', () => this.scrollProjectsTo('right'));
     }
+  }
 
-    // Remove auto-scroll start
+  startInfiniteScroll() {
+    if (this.infiniteScrollRafId !== null) return;
+    
+    const animate = () => {
+      if (!this.isProjectsHovered && this.scrollContainer) {
+        const cardWidth = 400 + 25; // card width + gap
+        const originalCards = this.scrollContainer.querySelectorAll('.project-card:not(.cloned-card)');
+        const totalWidth = cardWidth * originalCards.length;
+        
+        this.scrollPosition += this.autoScrollSpeed;
+        
+        // Reset position when we've scrolled through all original cards
+        if (this.scrollPosition >= totalWidth) {
+          this.scrollPosition = 0;
+        }
+        
+        this.scrollContainer.scrollLeft = this.scrollPosition;
+      }
+      
+      this.infiniteScrollRafId = requestAnimationFrame(animate);
+    };
+    
+    this.infiniteScrollRafId = requestAnimationFrame(animate);
+  }
+
+  stopInfiniteScroll() {
+    if (this.infiniteScrollRafId !== null) {
+      cancelAnimationFrame(this.infiniteScrollRafId);
+      this.infiniteScrollRafId = null;
+    }
   }
 
   // Add a method to handle manual navigation with the arrows
