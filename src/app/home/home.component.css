@@ -10,8 +10,16 @@ body {
   scroll-behavior: smooth;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
+  /* Enhanced smooth scrolling */
+  scroll-padding-top: 80px;
+  
   /* CSS-based custom cursor using inline SVG without purple glow */
   cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="48" viewBox="0 0 24 24"><path fill="%23FFF" stroke="%23000" stroke-width="2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z"></path></svg>') 12 12, auto;
+}
+
+/* Enhanced smooth scrolling for all sections */
+section {
+  scroll-margin-top: 80px;
 }
 
 /* Remove custom cursor on mobile devices */
@@ -67,7 +75,7 @@ button {
   top: 0;
   left: 0;
   overflow: hidden;
-  background: linear-gradient(40deg, rgb(46, 43, 48), rgb(23, 26, 34));
+  background: #000000;
   z-index: 1;
   will-change: transform;
   transform: translateZ(0);
@@ -522,6 +530,22 @@ main.main {
   padding-top: 10px;
 }
 
+/* Red buttons for live and demo links */
+.project-link.live,
+.project-link.demo {
+  background-color: rgba(220, 53, 69, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.project-link.live:hover,
+.project-link.demo:hover {
+  background-color: rgba(220, 53, 69, 1);
+  box-shadow: 0 8px 15px -5px rgba(220, 53, 69, 0.4), 
+              0 8px 10px -5px rgba(0,0,0,.14), 
+              0 2px 20px -5px rgba(220, 53, 69, 0.3);
+}
+
 /* Remove unused section divider styles */
 .section-divider {
   display: none;
@@ -796,6 +820,10 @@ main.main {
   -ms-overflow-style: none; /* IE/Edge */
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  
+  /* Enhanced smooth scrolling */
+  scroll-padding-left: 40px;
+  scroll-padding-right: 40px;
 }
 
 .projects-grid::-webkit-scrollbar {
@@ -823,6 +851,11 @@ main.main {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.04);
+  scroll-snap-align: start;
+}
+
+.project-card::before {
+  display: none;
 }
 
 .project-card:hover {
@@ -830,6 +863,10 @@ main.main {
   box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 
               0 8px 10px 1px rgba(0,0,0,.14), 
               0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.project-card:hover::before {
+  opacity: 0;
 }
 
 .project-card img {
@@ -900,38 +937,82 @@ main.main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 18px;
+  padding: 12px 20px;
   border-radius: 24px;
-  background-color: rgba(45, 50, 65, 0.9);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   color: white;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
-              0 6px 10px 0 rgba(0,0,0,.14), 
-              0 1px 18px 0 rgba(0,0,0,.12);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.github-link {
-  background-color: rgba(36, 41, 47, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.project-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent
+  );
+  transition: left 0.5s ease;
 }
 
-.demo-link {
-  background-color: rgba(230, 33, 23, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.project-link:hover::before {
+  left: 100%;
 }
 
-.project-link:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 15px -5px rgba(0,0,0,.2), 
-              0 8px 10px -5px rgba(0,0,0,.14), 
-              0 2px 20px -5px rgba(0,0,0,.12);
+/* GitHub button styling with solid design */
+.project-link.github {
+  background: rgba(255, 255, 255, 0.95);
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.project-link:active {
-  transform: translateY(-2px);
+.project-link.github:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #000000;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.project-link.github img {
+  filter: invert(0); /* Make GitHub icon black */
+}
+
+/* Working on it button styling with solid effects */
+.project-link.working-on-it {
+  background: rgba(220, 53, 69, 0.9);
+  color: #fff;
+  border: 1px solid rgba(220, 53, 69, 0.6);
+  cursor: default;
+}
+
+.project-link.working-on-it:hover {
+  background: rgba(220, 53, 69, 1);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+/* Demo/Live button styling */
+.project-link.demo,
+.project-link.live {
+  background: rgba(220, 53, 69, 0.9);
+  border: 1px solid rgba(220, 53, 69, 0.6);
+  color: #fff;
+}
+
+.project-link.demo:hover,
+.project-link.live:hover {
+  background: rgba(220, 53, 69, 1);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
 }
 
 .project-link img,
@@ -954,12 +1035,15 @@ main.main {
   letter-spacing: 0.5px;
 }
 
-.github-link:hover {
-  background-color: rgba(40, 46, 52, 1);
+.demo-link:hover {
+  background-color: rgba(220, 53, 69, 0.9);
+  box-shadow: 0 8px 15px -5px rgba(220, 53, 69, 0.4), 
+              0 8px 10px -5px rgba(0,0,0,.14), 
+              0 2px 20px -5px rgba(220, 53, 69, 0.3);
 }
 
-.demo-link:hover {
-  background-color: rgba(230, 33, 23, 0.9);
+.project-link:active {
+  transform: translateY(-2px);
 }
 
 /* Contributor badge - Material design emphasis */
@@ -1028,6 +1112,10 @@ main.main {
   box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 
               0 8px 10px 1px rgba(0,0,0,.14), 
               0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.scroll-arrow:hover:before {
+  border-color: rgba(255, 255, 255, 1);
 }
 
 .scroll-arrow:active {
@@ -1571,6 +1659,254 @@ body[data-parallax-scroll] .parallax {
   padding: 4rem 0;
 }
 
+.centered-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.experience-list {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.experience-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.experience-icon {
+  flex-shrink: 0;
+  margin-right: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.company-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.company-icon:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.experience-content {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.job-info {
+  text-align: left;
+}
+
+.job-info h3.job-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+}
+
+.company-name {
+  font-size: 1rem;
+  color: rgba(160, 160, 160, 1);
+  margin: 0 0 0.25rem 0;
+  font-weight: 500;
+  text-align: left;
+}
+
+.job-location {
+  font-size: 0.85rem;
+  color: rgba(120, 120, 120, 1);
+  margin: 0;
+  text-align: left;
+}
+
+.job-date {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  margin: 0;
+  padding: 0.25rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+.responsibilities-list {
+  list-style: disc;
+  list-style-position: outside;
+  margin: 0;
+  padding-left: 1.2rem;
+  text-align: left;
+}
+
+.responsibilities-list li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: left;
+}
+
+.responsibilities-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* GitHub button styling with white background */
+.project-link.github {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.project-link.github:hover {
+  background-color: rgba(255, 255, 255, 1);
+  color: #000000;
+}
+
+.github-link img {
+  filter: invert(0); /* Make GitHub icon black */
+}
+
+/* Working on it button styling */
+.project-link.working-on-it {
+  background-color: rgba(220, 53, 69, 0.9);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: default;
+}
+
+.project-link.working-on-it:hover {
+  background-color: rgba(220, 53, 69, 1);
+  box-shadow: 0 8px 15px -5px rgba(220, 53, 69, 0.4), 
+              0 8px 10px -5px rgba(0,0,0,.14), 
+              0 2px 20px -5px rgba(220, 53, 69, 0.3);
+}
+
+/* Mobile responsive for experience */
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 3rem 0;
+  }
+  
+  .experience-list {
+    padding: 1rem;
+  }
+  
+  .experience-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .job-date {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+  
+  .experience-icon {
+    margin-right: 1rem;
+  }
+  
+  .company-icon {
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+  }
+  
+  .job-info h3.job-title {
+    font-size: 1.2rem;
+  }
+  
+  .company-name {
+    font-size: 0.95rem;
+  }
+  
+  .job-location {
+    font-size: 0.8rem;
+  }
+  
+  .job-date {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.8rem;
+  }
+  
+  .responsibilities-list {
+    padding-left: 1rem;
+  }
+  
+  .responsibilities-list li {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-section {
+    padding: 2rem 0;
+  }
+  
+  .experience-list {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .experience-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .experience-icon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .company-icon {
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+  }
+  
+  .experience-content {
+    width: 100%;
+  }
+  
+  .responsibilities-list {
+    padding-left: 1rem;
+  }
+}
+
 /* Projects Section Styles */
 .projects-section {
   padding: 4rem 0;
@@ -2053,4 +2389,323 @@ body[data-parallax-scroll] .parallax-deep {
 .timeline-content:hover .logo-image {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* TrackVest Showcase Section */
+.trackvest-showcase-section {
+  position: relative;
+  z-index: 10;
+  min-height: 60vh;
+  margin-top: 80px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.trackvest-showcase-banner {
+  background: linear-gradient(135deg, rgba(35, 40, 55, 0.9), rgba(45, 50, 70, 0.8));
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
+              0 6px 10px 0 rgba(0,0,0,.14), 
+              0 1px 18px 0 rgba(0,0,0,.12);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  animation: fadeInUp 0.9s ease forwards;
+  animation-delay: 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trackvest-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.trackvest-showcase-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.trackvest-logo-container h2 {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.trackvest-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 90%;
+  margin: 0 auto 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.trackvest-status {
+  font-size: 1rem;
+  color: rgba(100, 220, 140, 0.9);
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.trackvest-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.trackvest-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 28px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 
+              0 6px 10px 0 rgba(0,0,0,.14), 
+              0 1px 18px 0 rgba(0,0,0,.12);
+  min-width: 140px;
+}
+
+.trackvest-link .link-icon {
+  font-size: 1.1rem;
+}
+
+.live-link {
+  background-color: rgba(220, 53, 69, 0.9);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-link {
+  background-color: rgba(220, 53, 69, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trackvest-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px -5px rgba(0,0,0,.2), 
+              0 8px 10px -5px rgba(0,0,0,.14), 
+              0 2px 20px -5px rgba(0,0,0,.12);
+}
+
+.live-link:hover {
+  background-color: rgba(220, 53, 69, 1);
+  box-shadow: 0 8px 15px -5px rgba(220, 53, 69, 0.4), 
+              0 8px 10px -5px rgba(0,0,0,.14), 
+              0 2px 20px -5px rgba(220, 53, 69, 0.3);
+}
+
+.demo-link:hover {
+  background-color: rgba(220, 53, 69, 0.95);
+  box-shadow: 0 8px 15px -5px rgba(220, 53, 69, 0.4), 
+              0 8px 10px -5px rgba(0,0,0,.14), 
+              0 2px 20px -5px rgba(220, 53, 69, 0.3);
+}
+
+.trackvest-link:active {
+  transform: translateY(-2px);
+}
+
+/* Mobile responsive for TrackVest showcase */
+@media (max-width: 768px) {
+  .trackvest-showcase-banner {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+  }
+  
+  .trackvest-logo-container {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .trackvest-logo-container h2 {
+    font-size: 2rem;
+  }
+  
+  .trackvest-showcase-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .trackvest-description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .trackvest-status {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  
+  .trackvest-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .trackvest-link {
+    width: 100%;
+    max-width: 250px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .trackvest-showcase-section {
+    padding: 2rem 1rem;
+  }
+  
+  .trackvest-showcase-banner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .trackvest-logo-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .trackvest-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Credits Section */
+.credits-section {
+  position: relative;
+  z-index: 10;
+  padding: 2rem 0 3rem;
+  background: rgba(15, 15, 20, 0.9);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.credits-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0 2rem;
+}
+
+.credits-links {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.credits-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.credits-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.credits-link:hover img {
+  transform: translateY(-3px) scale(1.1);
+  opacity: 0.8;
+}
+
+.github-icon {
+  filter: invert(1); /* Make GitHub icon white */
+}
+
+.linkedin-icon {
+  /* Keep LinkedIn icon as is */
+}
+
+.gmail-icon {
+  /* Keep Gmail icon as is */
+}
+
+.credits-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Mobile responsive for credits */
+@media (max-width: 768px) {
+  .credits-section {
+    padding: 1.5rem 0 2rem;
+  }
+  
+  .credits-content {
+    padding: 0 1rem;
+  }
+  
+  .credits-links {
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .credits-link img {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .credits-text {
+    font-size: 0.8rem;
+  }
+}
+
+.github-link:hover {
+  background-color: rgba(255, 255, 255, 1);
+  color: #000000;
+}
+
+.github-link img {
+  filter: invert(0); /* Make GitHub icon black */
+}
+
+/* Enhanced smooth scrolling and transitions */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improved performance transitions */
+.project-card,
+.project-link,
+.tag,
+.scroll-arrow {
+  will-change: transform, opacity, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
 }

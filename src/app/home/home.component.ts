@@ -13,12 +13,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('typingTarget') typingTarget!: ElementRef;
   @ViewChild('subText') subText!: ElementRef;
   @ViewChild('mainCursor') mainCursor!: ElementRef;
-  @ViewChild('subCursor') subCursor!: ElementRef;
   @ViewChild('projectsContainer') projectsContainer!: ElementRef;
   
-  textToType = "Hi I'm Ayan!";
+  textToType = "Hello I'm Ayan!";
   subTextToType = "CS @ UCI";
-  greetings = ["Hi", "Hola", "Bonjour", "Ciao", "Namaste", "こんにちは", "안녕하세요", "你好", "Hallo", "Olá"];
+  greetings = ["Hello I'm", "Hola soy", "Bonjour je suis", "Ciao sono", "Namaste main", "こんにちは私は", "안녕하세요 저는", "你好我是", "Hallo ich bin", "Olá eu sou"];
   currentGreetingIndex = 0;
   cursorPosition = { x: 50, y: 50 }; // Default cursor position
   targetPosition = { x: 50, y: 50 }; // Target position for smooth transition
@@ -242,7 +241,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     if (this.typingTarget) {
       const currentText = this.typingTarget.nativeElement.textContent || "";
       const greeting = this.greetings[this.currentGreetingIndex];
-      const staticText = " I'm Ayan!";
+      const staticText = " Ayan!";
       
       // If there's existing text, delete it first
       if (currentText.length > 0) {
@@ -365,21 +364,45 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   scrollProjectsTo(direction: 'left' | 'right') {
     if (!this.scrollContainer) return;
     
-    // No need to stop autoscrolling since it's removed
-    
-    // Calculate the scroll distance (one card width + gap)
+    // Calculate the scroll distance with improved smoothness
     const projectCard = this.scrollContainer.querySelector('.project-card') as HTMLElement;
     const cardWidth = projectCard ? projectCard.offsetWidth : 450;
     const gap = 25; // gap from CSS
     const scrollDistance = cardWidth + gap;
     
-    // Perform the scroll
-    this.scrollContainer.scrollBy({
-      left: direction === 'left' ? -scrollDistance : scrollDistance,
-      behavior: 'smooth' 
-    });
+    // Use requestAnimationFrame for smoother scrolling
+    const currentScroll = this.scrollContainer.scrollLeft;
+    const targetScroll = direction === 'left' 
+      ? Math.max(0, currentScroll - scrollDistance)
+      : currentScroll + scrollDistance;
     
-    // No need to resume autoscroll
+    // Custom smooth scroll implementation for better control
+    this.smoothScrollTo(this.scrollContainer, targetScroll, 400);
+  }
+
+  // Custom smooth scroll function for better performance
+  private smoothScrollTo(element: HTMLElement, targetX: number, duration: number) {
+    const startX = element.scrollLeft;
+    const distance = targetX - startX;
+    const startTime = performance.now();
+    
+    const animateScroll = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeInOutCubic = (t: number) => 
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      
+      const easedProgress = easeInOutCubic(progress);
+      element.scrollLeft = startX + (distance * easedProgress);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+    
+    requestAnimationFrame(animateScroll);
   }
 
   scheduleParallaxUpdate() {

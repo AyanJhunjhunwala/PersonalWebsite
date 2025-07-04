@@ -48,11 +48,11 @@
           
           <!-- Typing container for subtitle -->
           <div class="subtitle-container">
-            <span #subText class="typing-text"></span><span #subCursor class="cursor"></span>
+            <span #subText class="typing-text"></span>
           </div>
           
           <!-- Static text that fades in after typing -->
-          <p class="fade-in-text">Building AI &amp; ML platforms daily</p>
+          <p class="fade-in-text">Building AI &amp; ML platforms</p>
         </section>
         
         <!-- Links section with only icons -->
@@ -91,75 +91,91 @@
   <section id="experience" class="experience-section">
     <main class="main">
       <div class="content">
-        <h1 class="section-title">Experience</h1>
-        <div class="timeline">
-          <!-- Experience Item 1 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <h3>ML Researcher</h3>
-                <span class="company">UC Irvine</span>
-                <span class="date">Present</span>
-              </div>
-              <div class="timeline-body">
-                <p>Working on LLM Quantization currently - Visualizations and Perplexity Analysis.<br> Incoming researcher with Dr. William Karnes this summer working on gasterointestinal medical imaging and cancer genetics database automation with NLP</p>
-                <div class="skills-container">
-                  <span class="skill-tag">PyTorch</span>
-                  <span class="skill-tag">Deep Learning</span>
-                  <span class="skill-tag">Research</span>
-                  <span class="skill-tag">NLP</span>
-                  <span class="skill-tag">CV</span>
+        <h1 class="section-title centered-title">Experience</h1>
+        <div class="experience-list">
+          
+          <!-- Experience Item 1 - LBA -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/lba.png" alt="LBA" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">AI Engineering Intern (Incoming)</h3>
+                  <p class="company-name">LBA</p>
+                  <p class="job-location">Irvine, CA</p>
                 </div>
+                <p class="job-date">June 2025 – Present</p>
               </div>
+
             </div>
           </div>
 
-          <!-- Experience Item 2 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <h3>IBM Apprentice</h3>
-                <span class="company">Accelerate 2024</span>
-                <span class="date">May 2024 - July 2024</span>
-              </div>
-              <div class="timeline-body">
-                <p>Worked with the AI & Research branch at IBM, testing both open-source LLMs as well as developing my own using Python and IBM Watson. Accelerate has an acceptance rate of sub 5%.</p>
-                <p>Gained expertise in developing and scaling LLMs using Tensorflow and DeepSpeed, optimizing resource allocation, learned about IBM's hybrid cloud solutions, understanding how to work to enhance flexibility, security, and efficiency in cloud computing environments.</p>
-                <div class="skills-container">
-                  <span class="skill-tag">Python</span>
-                  <span class="skill-tag">Pandas</span>
-                  <span class="skill-tag">IBM Watson</span>
-                  <span class="skill-tag">IBM Cloud</span>
-                  <span class="skill-tag">Tensorflow</span>
-                  <span class="skill-tag">DeepSpeed</span>
+          <!-- Experience Item 2 - UCI -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/uci.svg" alt="UC Irvine" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">ML Researcher</h3>
+                  <p class="company-name">UC Irvine</p>
+                  <p class="job-location">Irvine, CA</p>
                 </div>
+                <p class="job-date">Present</p>
               </div>
+              <ul class="responsibilities-list">
+                <li>Currently developing a CNN driven model to guide colonoscopy gaze tools, aiding med students in real-time navigation</li>
+                <li>Worked on LLM Quantization helped optimize perplexity analysis experiments and created self updating data visualizations.</li>
+                <li>Incoming researcher with Dr. William Karnes this summer working on gastroenterological medical imaging and cancer genetics database automation with NLP</li>
+              </ul>
             </div>
           </div>
 
-          <!-- Experience Item 3 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <h3>Research Assistant</h3>
-                <span class="company">ICANN - San Jose State University</span>
-                <span class="date">August 2022 - January 2023</span>
-              </div>
-              <div class="timeline-body">
-                <p>Wrote an algorithm to rank top 8% of submissions in the RSNA Cervical Spine Fracture Detection Challenge.</p>
-                <p>Worked on a mentored research paper that analyzed different types of neural network architectures and determined which ones were most efficient for fractures. Fine tuned ResNet to fit fracture data.</p>
-                <div class="skills-container">
-                  <span class="skill-tag">Pandas</span>
-                  <span class="skill-tag">Matplotlib</span>
-                  <span class="skill-tag">Scikit-learn</span>
-                  <span class="skill-tag">Git</span>
+          <!-- Experience Item 3 - IBM -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/ibm.jpg" alt="IBM" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">IBM Apprentice</h3>
+                  <p class="company-name">Accelerate 2024</p>
+                  <p class="job-location">Remote</p>
                 </div>
+                <p class="job-date">May 2024 - July 2024</p>
               </div>
+              <ul class="responsibilities-list">
+                <li>Worked with the AI & Research branch at IBM, testing both open-source LLMs as well as developing my own using Python and IBM Watson. Accelerate has an acceptance rate of sub 5%</li>
+                <li>Gained expertise in developing and scaling LLMs using Tensorflow and DeepSpeed, optimizing resource allocation, learned about IBM's hybrid cloud solutions, understanding how to work to enhance flexibility, security, and efficiency in cloud computing environments</li>
+              </ul>
             </div>
           </div>
+
+          <!-- Experience Item 4 - SJSU -->
+          <div class="experience-item">
+            <div class="experience-icon">
+              <img src="/sjsu.png" alt="SJSU" class="company-icon"/>
+            </div>
+            <div class="experience-content">
+              <div class="experience-header">
+                <div class="job-info">
+                  <h3 class="job-title">Research Assistant</h3>
+                  <p class="company-name">ICANN - San Jose State University</p>
+                  <p class="job-location">San Jose, California</p>
+                </div>
+                <p class="job-date">August 2022 - January 2023</p>
+              </div>
+              <ul class="responsibilities-list">
+                <li>Wrote an algorithm to rank top 8% of submissions in the RSNA Cervical Spine Fracture Detection Challenge</li>
+                <li>Worked on a mentored research paper that analyzed different types of neural network architectures and determined which ones were most efficient for fractures. Fine tuned ResNet to fit fracture data</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>
@@ -180,6 +196,52 @@
           <!-- Project Cards -->
           <section class="projects-grid" id="projectsGrid" #projectsContainer>
             
+            <!-- TrackVest -->
+            <div class="project-card trackvest-card">
+              <img src="/trackv.png" alt="TrackVest"/>
+              <h3>TrackVest</h3>
+              <p>
+                Visualize everything, demo out, V1 coming soon!
+              </p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">AWS Lambda</span>
+                <span class="tag">ETL Pipeline</span>
+                <span class="tag">DynamoDB</span>
+                <span class="tag">ESG Analysis</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link live" href="https://trackvest.xyz" target="_blank" rel="noopener">
+                  <span class="link-label">Live</span>
+                </a>
+                <a class="project-link demo" href="https://www.loom.com/share/e47498f8067e447ab4ab20184e0d5f26?sid=79fa3e27-5b3b-4265-80e7-1236d8c0f0ee" target="_blank" rel="noopener">
+                  <span class="link-label">Demo</span>
+                </a>
+              </div>
+
+            </div>
+
+            <!-- Custom CUDA LLM Quantization Engine -->
+            <div class="project-card">
+              <img src="/cuda.svg" alt="Custom CUDA LLM Quantization Engine"/>
+              <h3>Custom CUDA LLM Quantization Engine</h3>
+              <p>
+                High-performance CUDA-based quantization engine for large language models. Implements custom kernels for INT8/INT4 quantization with minimal accuracy loss. Features memory-efficient attention mechanisms and optimized GEMM operations for faster inference on NVIDIA GPUs.
+              </p>
+              <div class="project-tags">
+                <span class="tag">CUDA</span>
+                <span class="tag">C++</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">Quantization</span>
+                <span class="tag">GPU Optimization</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link working-on-it" href="#" onclick="return false;">
+                  <span class="link-label">Working on it...</span>
+                </a>
+              </div>
+            </div>
+
             <!-- ChordWizard -->
             <div class="project-card">
               <img src="/guitar.jpeg" alt="ChordWizard"/>
@@ -196,9 +258,11 @@
               <div class="project-links">
                 <a class="project-link github" href="https://github.com/AyanJhunjhunwala/ChordWizard" target="_blank" rel="noopener">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
                 </a>
                 <a class="project-link demo" href="https://www.youtube.com/watch?v=Afs9eBOozkk&t=10s&ab_channel=AyanJhunjhunwala" target="_blank" rel="noopener">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
+                  <span class="link-label">Demo</span>
                 </a>
               </div>
             </div>
@@ -219,6 +283,7 @@
               <div class="project-links">
                 <a class="project-link github" href="https://github.com/AyanJhunjhunwala/RedditReviewer" target="_blank" rel="noopener">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
                   </a>
               </div>
             </div>
@@ -239,9 +304,11 @@
               <div class="project-links">
                 <a class="project-link github" href="https://github.com/AyanJhunjhunwala/BiteBuddie" target="_blank" rel="noopener">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
                 </a>
                 <a class="project-link demo" href="https://www.youtube.com/watch?v=sJMMmCzp754&t=1s&ab_channel=MarielleInaBaumgartner" target="_blank" rel="noopener">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
+                  <span class="link-label">Demo</span>
                 </a>
               </div>
             </div>
@@ -262,26 +329,8 @@
               <div class="project-links">
                 <a class="project-link github" href="https://github.com/AyanJhunjhunwala/optionspricing" target="_blank" rel="noopener">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub Logo"/>
+                  <span class="link-label">GitHub</span>
                   </a>
-              </div>
-            </div>
-            
-            <!-- TrackVest -->
-            <div class="project-card trackvest-card">
-              <img src="/trackv.png" alt="TrackVest"/>
-              <h3>TrackVest</h3>
-              <p>
-                Aternative investment(Real Estate, Crypto, Art, etc.) dashboard with ETL pipelines for multi-asset tracking. Implements serverless AWS Lambda functions for real-time data processing with DynamoDB. Uses GROQ to automate investment tracking and to create custom alterbative investments with a simple prompt
-              </p>
-              <div class="project-tags">
-                <span class="tag">React</span>
-                <span class="tag">AWS Lambda</span>
-                <span class="tag">ETL Pipeline</span>
-                <span class="tag">DynamoDB</span>
-                <span class="tag">ESG Analysis</span>
-              </div>
-              <div class="contributor-badge-container">
-                <div class="contributor-badge">Looking for Contributors</div>
               </div>
             </div>
             
@@ -302,8 +351,7 @@
         <div class="contact-banner">
           <h2>Got a project idea or just want to chat?</h2>
           <p>
-            I'd love to hear from you. Whether you're brainstorming something new, 
-            looking to collaborate, or just want to say hello. feel free to reach out!
+            I'd love to hear from you. <br>I'm currently looking for Co-Founders/Engineers for TrackVest. It's been pivoted and funded so feel free to reach out
           </p>
         </div>
         <!-- Email Link -->
@@ -320,6 +368,24 @@
       <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path>
     </svg>
   </button>
+
+  <!-- Credits Section -->
+  <section class="credits-section">
+    <div class="credits-content">
+      <div class="credits-links">
+        <a class="credits-link" href="https://github.com/AyanJhunjhunwala" target="_blank" rel="noopener">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="github-icon"/>
+        </a>
+        <a class="credits-link" href="https://www.linkedin.com/in/ayanjhunjhunwala/" target="_blank" rel="noopener">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" class="linkedin-icon"/>
+        </a>
+        <a class="credits-link" href="mailto:ajhunjh1@uci.edu" target="_blank" rel="noopener">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" class="gmail-icon"/>
+        </a>
+      </div>
+      <p class="credits-text">© 2025 Ayan Jhunjhunwala. All rights reserved.</p>
+    </div>
+  </section>
 
   <!-- Basic Section Navigation Script -->
   <script>
